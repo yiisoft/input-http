@@ -1,5 +1,5 @@
 {
-    "name": "yiisoft/_____",
+    "name": "yiisoft/input-http",
     "type": "library",
     "description": "_____",
     "keywords": [
@@ -8,12 +8,12 @@
     "homepage": "https://www.yiiframework.com/",
     "license": "BSD-3-Clause",
     "support": {
-        "issues": "https://github.com/yiisoft/_____/issues?state=open",
+        "issues": "https://github.com/yiisoft/input-http/issues?state=open",
         "forum": "https://www.yiiframework.com/forum/",
         "wiki": "https://www.yiiframework.com/wiki/",
         "irc": "ircs://irc.libera.chat:6697/yii",
         "chat": "https://t.me/yii3en",
-        "source": "https://github.com/yiisoft/_____"
+        "source": "https://github.com/yiisoft/input-http"
     },
     "funding": [
         {
@@ -28,7 +28,8 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": "^8.1"
+        "php": "^8.0",
+        "psr/http-message": "^1.0|^2.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5",
@@ -39,12 +40,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Yiisoft\\_____\\": "src"
+            "Yiisoft\\Input\\Http\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Yiisoft\\_____\\Tests\\": "tests"
+            "Yiisoft\\Input\\Http\\Tests\\": "tests"
         }
     },
     "config": {
