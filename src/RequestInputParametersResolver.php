@@ -7,6 +7,7 @@ namespace Yiisoft\Input\Http;
 use Psr\Http\Message\ServerRequestInterface;
 use ReflectionClass;
 use ReflectionNamedType;
+use ReflectionParameter;
 use Yiisoft\Hydrator\HydratorInterface;
 use Yiisoft\Middleware\Dispatcher\ParametersResolverInterface;
 
@@ -19,8 +20,11 @@ final class RequestInputParametersResolver implements ParametersResolverInterfac
     }
 
     /**
+     * @param ReflectionParameter[] $parameters
+     *
      * @return RequestInputInterface[]
      *
+     * @psalm-param array<string,ReflectionParameter> $parameters
      * @psalm-return array<string,RequestInputInterface>
      */
     public function resolve(array $parameters, ServerRequestInterface $request): array

@@ -10,12 +10,18 @@ use Yiisoft\Hydrator\ParameterAttributeInterface;
 #[Attribute(Attribute::TARGET_PROPERTY | Attribute::TARGET_PARAMETER)]
 final class UploadedFiles implements ParameterAttributeInterface
 {
+    /**
+     * @psalm-param string|list<string>|null $name
+     */
     public function __construct(
         private string|array|null $name = null
     )
     {
     }
 
+    /**
+     * @psalm-return string|list<string>|null
+     */
     public function getName(): string|array|null
     {
         return $this->name;
