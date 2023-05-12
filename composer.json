@@ -35,7 +35,8 @@
         "yiisoft/arrays": "^3.0",
         "yiisoft/hydrator": "dev-master",
         "yiisoft/hydrator-validator": "dev-master",
-        "yiisoft/middleware-dispatcher": "^5.1"
+        "yiisoft/middleware-dispatcher": "^5.1",
+        "yiisoft/validator": "^1.1"
     },
     "require-dev": {
         "maglnet/composer-require-checker": "^4.4",
@@ -44,8 +45,7 @@
         "roave/infection-static-analysis-plugin": "^1.16",
         "spatie/phpunit-watcher": "^1.23",
         "vimeo/psalm": "^4.30|^5.7",
-        "yiisoft/test-support": "^3.0",
-        "yiisoft/validator": "^1.1"
+        "yiisoft/test-support": "^3.0"
     },
     "autoload": {
         "psr-4": {
