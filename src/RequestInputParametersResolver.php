@@ -23,12 +23,11 @@ final class RequestInputParametersResolver implements ParametersResolverInterfac
     /**
      * @param ReflectionParameter[] $parameters
      *
+     * @throws InputValidationException
      * @return RequestInputInterface[]
      *
      * @psalm-param array<string,ReflectionParameter> $parameters
      * @psalm-return array<string,RequestInputInterface>
-     *
-     * @throws InputValidationException
      */
     public function resolve(array $parameters, ServerRequestInterface $request): array
     {
