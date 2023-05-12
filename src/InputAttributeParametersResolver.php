@@ -13,8 +13,7 @@ final class InputAttributeParametersResolver implements ParametersResolverInterf
 {
     public function __construct(
         private ParameterAttributesHandler $handler,
-    )
-    {
+    ) {
     }
 
     public function resolve(array $parameters, ServerRequestInterface $request): array

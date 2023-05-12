@@ -12,8 +12,7 @@ final class RequestCatcherParametersResolver implements ParametersResolverInterf
 {
     public function __construct(
         private RequestProviderInterface $provider,
-    )
-    {
+    ) {
     }
 
     public function resolve(array $parameters, ServerRequestInterface $request): array

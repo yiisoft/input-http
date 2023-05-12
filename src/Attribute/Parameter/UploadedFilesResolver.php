@@ -17,15 +17,13 @@ final class UploadedFilesResolver implements ParameterAttributeResolverInterface
 {
     public function __construct(
         private RequestProviderInterface $requestProvider
-    )
-    {
+    ) {
     }
 
     public function getParameterValue(
         ParameterAttributeInterface $attribute,
         Context $context
-    ): array|UploadedFileInterface
-    {
+    ): array|UploadedFileInterface {
         if (!$attribute instanceof UploadedFiles) {
             throw new UnexpectedAttributeException(UploadedFiles::class, $attribute);
         }

@@ -17,8 +17,7 @@ final class FromBodyResolver implements DataAttributeResolverInterface
 {
     public function __construct(
         private RequestProviderInterface $requestProvider,
-    )
-    {
+    ) {
     }
 
     public function prepareData(DataAttributeInterface $attribute, Data $data): void

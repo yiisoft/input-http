@@ -22,8 +22,7 @@ final class FromQuery implements DataAttributeInterface
         private string|array|null $name = null,
         private array $map = [],
         private bool $strict = false,
-    )
-    {
+    ) {
     }
 
     /**

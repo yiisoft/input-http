@@ -15,8 +15,7 @@ final class Request implements ParameterAttributeInterface
      */
     public function __construct(
         private string|array|null $name = null
-    )
-    {
+    ) {
     }
 
     /**

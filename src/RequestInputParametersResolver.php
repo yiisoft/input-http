@@ -15,8 +15,7 @@ final class RequestInputParametersResolver implements ParametersResolverInterfac
 {
     public function __construct(
         private HydratorInterface $hydrator,
-    )
-    {
+    ) {
     }
 
     /**

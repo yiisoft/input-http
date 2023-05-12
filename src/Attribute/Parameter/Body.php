@@ -15,8 +15,7 @@ final class Body implements ParameterAttributeInterface
      */
     public function __construct(
         private string|array|null $name = null
-    )
-    {
+    ) {
     }
 
     /**

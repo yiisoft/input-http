@@ -19,8 +19,7 @@ final class BodyResolver implements ParameterAttributeResolverInterface
 {
     public function __construct(
         private RequestProviderInterface $requestProvider
-    )
-    {
+    ) {
     }
 
     public function getParameterValue(ParameterAttributeInterface $attribute, Context $context): mixed

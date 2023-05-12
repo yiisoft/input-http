@@ -14,8 +14,7 @@ final class RequestCatcherMiddleware implements MiddlewareInterface
 {
     public function __construct(
         private RequestProviderInterface $provider,
-    )
-    {
+    ) {
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
