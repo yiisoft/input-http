@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Yiisoft\Input\Http\ParametersResolver;
+namespace Yiisoft\Input\Http;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Yiisoft\Hydrator\NotResolvedException;
