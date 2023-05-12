@@ -9,12 +9,14 @@ use ReflectionClass;
 use ReflectionNamedType;
 use ReflectionParameter;
 use Yiisoft\Hydrator\HydratorInterface;
+use Yiisoft\Hydrator\Validator\ValidatedInputInterface;
 use Yiisoft\Middleware\Dispatcher\ParametersResolverInterface;
 
 final class RequestInputParametersResolver implements ParametersResolverInterface
 {
     public function __construct(
         private HydratorInterface $hydrator,
+        private bool $throwInputValidationException = false,
     ) {
     }
 
@@ -25,6 +27,8 @@ final class RequestInputParametersResolver implements ParametersResolverInterfac
      *
      * @psalm-param array<string,ReflectionParameter> $parameters
      * @psalm-return array<string,RequestInputInterface>
+     *
+     * @throws InputValidationException
      */
     public function resolve(array $parameters, ServerRequestInterface $request): array
     {
@@ -43,9 +47,29 @@ final class RequestInputParametersResolver implements ParametersResolverInterfac
                 && $reflectionClass->implementsInterface(RequestInputInterface::class)
             ) {
                 /** @psalm-var class-string<RequestInputInterface> $class */
-                $result[$parameter->getName()] = $this->hydrator->create($class);
+                $value = $this->hydrator->create($class);
+                $this->processValidation($value);
+                $result[$parameter->getName()] = $value;
             }
         }
         return $result;
+    }
+
+    /**
+     * @throws InputValidationException
+     */
+    private function processValidation(mixed $value): void
+    {
+        if (
+            !$this->throwInputValidationException
+            || !$value instanceof ValidatedInputInterface
+        ) {
+            return;
+        }
+
+        $result = $value->getValidationResult();
+        if ($result !== null && !$result->isValid()) {
+            throw new InputValidationException($result);
+        }
     }
 }
