@@ -16,7 +16,7 @@ use function is_array;
 final class FromBodyResolver implements DataAttributeResolverInterface
 {
     public function __construct(
-        private readonly RequestProviderInterface $requestProvider,
+        private RequestProviderInterface $requestProvider,
     ) {
     }
 

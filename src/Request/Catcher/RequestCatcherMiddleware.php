@@ -13,7 +13,7 @@ use Yiisoft\Input\Http\Request\RequestProviderInterface;
 final class RequestCatcherMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private readonly RequestProviderInterface $provider,
+        private RequestProviderInterface $provider,
     ) {
     }
 

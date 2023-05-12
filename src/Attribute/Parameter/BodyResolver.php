@@ -18,7 +18,7 @@ use function is_array;
 final class BodyResolver implements ParameterAttributeResolverInterface
 {
     public function __construct(
-        private readonly RequestProviderInterface $requestProvider
+        private RequestProviderInterface $requestProvider
     ) {
     }
 

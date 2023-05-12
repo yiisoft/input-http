@@ -16,7 +16,7 @@ use Yiisoft\Input\Http\Request\RequestProviderInterface;
 final class UploadedFilesResolver implements ParameterAttributeResolverInterface
 {
     public function __construct(
-        private readonly RequestProviderInterface $requestProvider
+        private RequestProviderInterface $requestProvider
     ) {
     }
 
