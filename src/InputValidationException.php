@@ -10,7 +10,7 @@ use Yiisoft\Validator\Result;
 final class InputValidationException extends RuntimeException
 {
     public function __construct(
-        private Result $result,
+        private readonly Result $result,
     ) {
         parent::__construct('Input validation error.');
     }

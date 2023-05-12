@@ -19,9 +19,9 @@ final class FromBody implements DataAttributeInterface
      * @psalm-param MapType $map
      */
     public function __construct(
-        private string|array|null $name = null,
-        private array $map = [],
-        private bool $strict = false,
+        private readonly string|array|null $name = null,
+        private readonly array $map = [],
+        private readonly bool $strict = false,
     ) {
     }
 

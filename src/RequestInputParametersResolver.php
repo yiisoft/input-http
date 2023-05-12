@@ -15,20 +15,19 @@ use Yiisoft\Middleware\Dispatcher\ParametersResolverInterface;
 final class RequestInputParametersResolver implements ParametersResolverInterface
 {
     public function __construct(
-        private HydratorInterface $hydrator,
-        private bool $throwInputValidationException = false,
+        private readonly HydratorInterface $hydrator,
+        private readonly bool $throwInputValidationException = false,
     ) {
     }
 
     /**
      * @param ReflectionParameter[] $parameters
      *
+     * @throws InputValidationException
      * @return RequestInputInterface[]
      *
      * @psalm-param array<string,ReflectionParameter> $parameters
      * @psalm-return array<string,RequestInputInterface>
-     *
-     * @throws InputValidationException
      */
     public function resolve(array $parameters, ServerRequestInterface $request): array
     {
