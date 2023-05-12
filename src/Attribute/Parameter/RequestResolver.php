@@ -15,7 +15,7 @@ use Yiisoft\Input\Http\Request\RequestProviderInterface;
 final class RequestResolver implements ParameterAttributeResolverInterface
 {
     public function __construct(
-        private RequestProviderInterface $requestProvider
+        private readonly RequestProviderInterface $requestProvider
     ) {
     }
 

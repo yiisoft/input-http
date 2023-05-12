@@ -12,7 +12,7 @@ use Yiisoft\Middleware\Dispatcher\ParametersResolverInterface;
 final class HydratorAttributeParametersResolver implements ParametersResolverInterface
 {
     public function __construct(
-        private ParameterAttributesHandler $handler,
+        private readonly ParameterAttributesHandler $handler,
     ) {
     }
 

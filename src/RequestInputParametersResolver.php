@@ -15,8 +15,8 @@ use Yiisoft\Middleware\Dispatcher\ParametersResolverInterface;
 final class RequestInputParametersResolver implements ParametersResolverInterface
 {
     public function __construct(
-        private HydratorInterface $hydrator,
-        private bool $throwInputValidationException = false,
+        private readonly HydratorInterface $hydrator,
+        private readonly bool $throwInputValidationException = false,
     ) {
     }
 

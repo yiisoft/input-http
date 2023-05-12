@@ -14,7 +14,7 @@ final class Request implements ParameterAttributeInterface
      * @psalm-param string|list<string>|null $name
      */
     public function __construct(
-        private string|array|null $name = null
+        private readonly string|array|null $name = null
     ) {
     }
 

@@ -11,7 +11,7 @@ use Yiisoft\Middleware\Dispatcher\ParametersResolverInterface;
 final class RequestCatcherParametersResolver implements ParametersResolverInterface
 {
     public function __construct(
-        private RequestProviderInterface $provider,
+        private readonly RequestProviderInterface $provider,
     ) {
     }
 
