@@ -9,7 +9,7 @@ use Yiisoft\Hydrator\NotResolvedException;
 use Yiisoft\Hydrator\ParameterAttributesHandler;
 use Yiisoft\Middleware\Dispatcher\ParametersResolverInterface;
 
-final class InputAttributeParametersResolver implements ParametersResolverInterface
+final class HydratorAttributeParametersResolver implements ParametersResolverInterface
 {
     public function __construct(
         private ParameterAttributesHandler $handler,
