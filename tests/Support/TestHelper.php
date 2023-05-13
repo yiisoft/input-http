@@ -7,9 +7,15 @@ namespace Yiisoft\Input\Http\Tests\Support;
 use Closure;
 use ReflectionFunction;
 use ReflectionParameter;
+use Yiisoft\Hydrator\Context;
 
 final class TestHelper
 {
+    public static function createContext(): Context
+    {
+        return new Context(self::getParameters(static fn(int $a) => null)['a'], false, null, [], []);
+    }
+
     /**
      * @psalm-return array<string,ReflectionParameter>
      */
