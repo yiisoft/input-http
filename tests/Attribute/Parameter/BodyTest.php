@@ -6,13 +6,10 @@ namespace Yiisoft\Input\Http\Tests\Attribute\Parameter;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
-use Yiisoft\Hydrator\Context;
 use Yiisoft\Hydrator\Hydrator;
 use Yiisoft\Input\Http\Attribute\Parameter\Body;
 use Yiisoft\Input\Http\Attribute\Parameter\BodyResolver;
-use Yiisoft\Input\Http\Attribute\Parameter\Query;
 use Yiisoft\Input\Http\Request\RequestProvider;
-use Yiisoft\Input\Http\Request\RequestProviderInterface;
 use Yiisoft\Test\Support\Container\SimpleContainer;
 
 final class BodyTest extends TestCase
@@ -24,7 +21,7 @@ final class BodyTest extends TestCase
             'b' => 'two',
         ]);
 
-        $input = new class() {
+        $input = new class () {
             #[Body('a')]
             public string $a = '';
             #[Body('b')]
@@ -44,7 +41,7 @@ final class BodyTest extends TestCase
     {
         $hydrator = $this->createHydrator(null);
 
-        $input = new class() {
+        $input = new class () {
             #[Body('a')]
             public string $a = '';
             #[Body('b')]
@@ -67,7 +64,7 @@ final class BodyTest extends TestCase
             'b' => 'two',
         ]);
 
-        $input = new class() {
+        $input = new class () {
             #[Body('a.b')]
             public string $a = '';
         };
@@ -87,7 +84,7 @@ final class BodyTest extends TestCase
 
         return new Hydrator(
             new SimpleContainer([
-                BodyResolver::class => new BodyResolver($requestProvider)
+                BodyResolver::class => new BodyResolver($requestProvider),
             ]),
         );
     }

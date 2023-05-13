@@ -82,7 +82,7 @@ final class FromBodyTest extends TestCase
 
         return new Hydrator(
             new SimpleContainer([
-                FromBodyResolver::class => new FromBodyResolver($requestProvider)
+                FromBodyResolver::class => new FromBodyResolver($requestProvider),
             ]),
         );
     }

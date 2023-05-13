@@ -82,7 +82,7 @@ final class FromQueryTest extends TestCase
 
         return new Hydrator(
             new SimpleContainer([
-                FromQueryResolver::class => new FromQueryResolver($requestProvider)
+                FromQueryResolver::class => new FromQueryResolver($requestProvider),
             ]),
         );
     }
