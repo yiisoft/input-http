@@ -30,7 +30,7 @@ final class FromBodyResolver implements DataAttributeResolverInterface
         if (is_array($parsedBody)) {
             $name = $attribute->getName();
             if ($name === null) {
-                $data->setData([]);
+                $data->setData($parsedBody);
             } else {
                 $value = ArrayHelper::getValueByPath($parsedBody, $name);
                 $data->setData(is_array($value) ? $value : []);
