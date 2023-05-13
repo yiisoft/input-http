@@ -10,7 +10,6 @@ use Psr\Http\Message\UploadedFileInterface;
 use Yiisoft\Hydrator\Hydrator;
 use Yiisoft\Hydrator\UnexpectedAttributeException;
 use Yiisoft\Input\Http\Attribute\Parameter\Body;
-use Yiisoft\Input\Http\Attribute\Parameter\Request;
 use Yiisoft\Input\Http\Attribute\Parameter\UploadedFiles;
 use Yiisoft\Input\Http\Attribute\Parameter\UploadedFilesResolver;
 use Yiisoft\Input\Http\Request\RequestProvider;
