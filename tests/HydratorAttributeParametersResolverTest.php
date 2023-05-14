@@ -6,13 +6,13 @@ namespace Yiisoft\Input\Http\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
-use Yiisoft\Hydrator\ParameterAttributesHandler;
 use Yiisoft\Input\Http\Attribute\Parameter\Body;
 use Yiisoft\Input\Http\Attribute\Parameter\BodyResolver;
 use Yiisoft\Input\Http\Attribute\Parameter\Query;
 use Yiisoft\Input\Http\Attribute\Parameter\QueryResolver;
 use Yiisoft\Input\Http\HydratorAttributeParametersResolver;
 use Yiisoft\Input\Http\Request\RequestProvider;
+use Yiisoft\Input\Http\Tests\Support\CallableTypeCaster;
 use Yiisoft\Input\Http\Tests\Support\TestHelper;
 use Yiisoft\Test\Support\Container\SimpleContainer;
 
@@ -28,12 +28,10 @@ final class HydratorAttributeParametersResolverTest extends TestCase
         $requestProvider->set($request);
 
         $resolver = new HydratorAttributeParametersResolver(
-            new ParameterAttributesHandler(
-                new SimpleContainer([
-                    QueryResolver::class => new QueryResolver($requestProvider),
-                    BodyResolver::class => new BodyResolver($requestProvider),
-                ]),
-            ),
+            new SimpleContainer([
+                QueryResolver::class => new QueryResolver($requestProvider),
+                BodyResolver::class => new BodyResolver($requestProvider),
+            ]),
         );
 
         $parameters = TestHelper::getParameters(
@@ -52,5 +50,35 @@ final class HydratorAttributeParametersResolverTest extends TestCase
         $this->assertSame(['a', 'b'], array_keys($result));
         $this->assertSame(1, $result['a']);
         $this->assertSame(2, $result['b']);
+    }
+
+    public function testTypeCasting(): void
+    {
+        $request = $this->createMock(ServerRequestInterface::class);
+        $request->method('getQueryParams')->willReturn(['age' => '21']);
+
+        $requestProvider = new RequestProvider();
+        $requestProvider->set($request);
+
+        $resolver = new HydratorAttributeParametersResolver(
+            new SimpleContainer([
+                QueryResolver::class => new QueryResolver($requestProvider),
+            ]),
+            new CallableTypeCaster(
+                static fn($value) => 100,
+            )
+        );
+
+        $parameters = TestHelper::getParameters(
+            static fn(
+                #[Query('age')]
+                int $age,
+            ) => null,
+        );
+
+        $result = $resolver->resolve($parameters, $request);
+
+        $this->assertSame(['age'], array_keys($result));
+        $this->assertSame(100, $result['age']);
     }
 }
