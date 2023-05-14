@@ -16,6 +16,6 @@ final class CallableTypeCaster implements TypeCasterInterface
 
     public function cast(mixed $value, ?ReflectionType $type): mixed
     {
-        return call_user_func($this->callable, $value);
+        return ($this->callable)($value);
     }
 }

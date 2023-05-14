@@ -6,7 +6,6 @@ namespace Yiisoft\Input\Http\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
-use Yiisoft\Hydrator\TypeCaster\SimpleTypeCaster;
 use Yiisoft\Input\Http\Attribute\Parameter\Body;
 use Yiisoft\Input\Http\Attribute\Parameter\BodyResolver;
 use Yiisoft\Input\Http\Attribute\Parameter\Query;
