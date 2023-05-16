@@ -46,6 +46,7 @@
         "roave/infection-static-analysis-plugin": "^1.16",
         "spatie/phpunit-watcher": "^1.23",
         "vimeo/psalm": "^4.30|^5.7",
+        "yiisoft/di": "^1.2",
         "yiisoft/test-support": "^3.0"
     },
     "autoload": {
@@ -56,6 +57,15 @@
     "autoload-dev": {
         "psr-4": {
             "Yiisoft\\Input\\Http\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "config-plugin-options": {
+            "source-directory": "config"
+        },
+        "config-plugin": {
+            "params-web": "params-web.php",
+            "di-web": "di-web.php"
         }
     },
     "config": {
