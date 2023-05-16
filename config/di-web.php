@@ -11,7 +11,13 @@ use Yiisoft\Input\Http\RequestInputParametersResolver;
 /** @var array $params */
 
 return [
-    RequestProviderInterface::class => RequestProvider::class,
+    RequestProviderInterface::class => [
+        'class' => RequestProvider::class,
+        'reset' => function () {
+            /** @var RequestProvider $this */
+            $this->request = null;
+        },
+    ],
     RequestInputParametersResolver::class => [
         '__construct()' => [
             'hydrator' => Reference::to(ValidatingHydrator::class),
