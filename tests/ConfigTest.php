@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Yiisoft\Input\Http\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Yiisoft\Config\Config;
-use Yiisoft\Config\ConfigPaths;
 use Yiisoft\Di\Container;
 use Yiisoft\Di\ContainerConfig;
 use Yiisoft\Hydrator\Hydrator;
@@ -16,6 +14,7 @@ use Yiisoft\Input\Http\Request\RequestProviderInterface;
 use Yiisoft\Input\Http\RequestInputParametersResolver;
 use Yiisoft\Validator\Validator;
 use Yiisoft\Validator\ValidatorInterface;
+
 use function dirname;
 
 final class ConfigTest extends TestCase
