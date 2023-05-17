@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace Yiisoft\Input\Http\Tests;
 
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ServerRequestInterface;
 use Yiisoft\Di\Container;
 use Yiisoft\Di\ContainerConfig;
+use Yiisoft\Di\StateResetter;
 use Yiisoft\Hydrator\Hydrator;
 use Yiisoft\Hydrator\HydratorInterface;
+use Yiisoft\Input\Http\Request\RequestNotSetException;
 use Yiisoft\Input\Http\Request\RequestProvider;
 use Yiisoft\Input\Http\Request\RequestProviderInterface;
 use Yiisoft\Input\Http\RequestInputParametersResolver;
@@ -21,14 +24,32 @@ final class ConfigTest extends TestCase
 {
     public function testDi(): void
     {
-        $container = new Container(
-            ContainerConfig::create()->withDefinitions($this->getContainerDefinitions())
-        );
+        $container = $this->createContainer();
 
         $this->assertInstanceOf(RequestProvider::class, $container->get(RequestProviderInterface::class));
         $this->assertInstanceOf(
             RequestInputParametersResolver::class,
             $container->get(RequestInputParametersResolver::class)
+        );
+    }
+
+    public function testResetRequestProvider(): void
+    {
+        $container = $this->createContainer();
+
+        $requestProvider = $container->get(RequestProviderInterface::class);
+        $requestProvider->set($this->createMock(ServerRequestInterface::class));
+
+        $container->get(StateResetter::class)->reset();
+
+        $this->expectException(RequestNotSetException::class);
+        $requestProvider->get();
+    }
+
+    private function createContainer(): Container
+    {
+        return new Container(
+            ContainerConfig::create()->withDefinitions($this->getContainerDefinitions())
         );
     }
 
