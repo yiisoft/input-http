@@ -39,7 +39,7 @@ final class FromQuery implements DataAttributeInterface
      * For example, `['user', 'name']` will get data from `$body['user']['name']`.
      * If `null`, the whole query string will be used.
      *
-     * @return string|array|null The field in the query string to get data from.
+     * @return array|string|null The field in the query string to get data from.
      * @psalm-return string|list<string>|null
      */
     public function getName(): string|array|null

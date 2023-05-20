@@ -17,7 +17,7 @@ use Yiisoft\Hydrator\HydratorInterface;
 final class FromBody implements DataAttributeInterface
 {
     /**
-     * @param string|array|null $name The field in the request body to get data from.
+     * @param array|string|null $name The field in the request body to get data from.
      * Array means a path.
      * For example, `['user', 'name']` will get data from `$body['user']['name']`.
      * If `null`, the whole body will be used.
@@ -40,7 +40,7 @@ final class FromBody implements DataAttributeInterface
      * For example, `['user', 'name']` will get data from `$body['user']['name']`.
      * If `null`, the whole body will be used.
      *
-     * @return string|array|null The field in the request body to get data from.
+     * @return array|string|null The field in the request body to get data from.
      * @psalm-return string|list<string>|null
      */
     public function getName(): string|array|null

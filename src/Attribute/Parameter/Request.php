@@ -14,7 +14,7 @@ use Yiisoft\Hydrator\ParameterAttributeInterface;
 final class Request implements ParameterAttributeInterface
 {
     /**
-     * @param string|array|null $name The field in the request attributes to get data from.
+     * @param array|string|null $name The field in the request attributes to get data from.
      * @psalm-param string|list<string>|null $name
      */
     public function __construct(

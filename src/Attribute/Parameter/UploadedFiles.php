@@ -14,7 +14,7 @@ use Yiisoft\Hydrator\ParameterAttributeInterface;
 final class UploadedFiles implements ParameterAttributeInterface
 {
     /**
-     * @param string|array|null $name The field in the uploaded files to get data from.
+     * @param array|string|null $name The field in the uploaded files to get data from.
      * @psalm-param string|list<string>|null $name
      */
     public function __construct(
@@ -25,7 +25,7 @@ final class UploadedFiles implements ParameterAttributeInterface
     /**
      * Get the name of the field in the uploaded files to get data from.
      *
-     * @return string|array|null The field in the uploaded files to get data from.
+     * @return array|string|null The field in the uploaded files to get data from.
      * @psalm-return string|list<string>|null
      */
     public function getName(): string|array|null
