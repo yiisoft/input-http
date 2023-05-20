@@ -12,10 +12,20 @@ use Yiisoft\Hydrator\TypeCaster\SimpleTypeCaster;
 use Yiisoft\Hydrator\TypeCasterInterface;
 use Yiisoft\Middleware\Dispatcher\ParametersResolverInterface;
 
+/**
+ * HydratorAttributeParametersResolver resolves parameters using attribute handlers.
+ */
 final class HydratorAttributeParametersResolver implements ParametersResolverInterface
 {
+    /**
+     * @var ParameterAttributesHandler The attribute handler.
+     */
     private ParameterAttributesHandler $handler;
 
+    /**
+     * @param ContainerInterface $container The container to get resolver from.
+     * @param TypeCasterInterface|null $typeCaster The type caster to use.
+     */
     public function __construct(
         ContainerInterface $container,
         ?TypeCasterInterface $typeCaster = null,

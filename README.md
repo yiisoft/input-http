@@ -15,7 +15,8 @@
 [![type-coverage](https://shepherd.dev/github/yiisoft/input-http/coverage.svg)](https://shepherd.dev/github/yiisoft/input-http)
 [![psalm-level](https://shepherd.dev/github/yiisoft/input-http/level.svg)](https://shepherd.dev/github/yiisoft/input-http)
 
-The package ...
+The package maps data from [PSR-7 HTTP request](https://www.php-fig.org/psr/psr-7/) to PHP DTO representing user input.
+In the DTO you can map request data to properties using PHP attributes.
 
 ## Requirements
 
@@ -30,6 +31,76 @@ composer require yiisoft/input-http
 ```
 
 ## General usage
+
+First, add `\Yiisoft\Input\Http\Request\Catcher\RequestCatcherMiddleware` to your application middleware stack.
+
+// TODO: finish the whole process!!!
+
+To use the package, you need to create a DTO class and mark its properties with attributes:
+
+```php
+use \Yiisoft\Input\Http\Attribute\Parameter\Query;
+use \Yiisoft\Input\Http\Attribute\Parameter\Body;
+use \Yiisoft\Input\Http\Attribute\Parameter\UploadedFiles;
+
+final class EditPostInput
+{
+    public function __construct(
+        #[Query]
+        private string $id,
+        #[Body]        
+        private string $title,
+        #[Body]        
+        private string $content,
+        #[UploadedFiles('uploads')]        
+        private $uploads,
+    )
+    {
+    
+    }
+
+    // getters
+        
+} 
+```
+
+Post id will be mapped from query parameter `id`, title and content will be mapped from request body and uploads will
+be mapped from request uploaded files.
+
+Additionally, you can fill a property from request attribute using `#[Request('attributeName')]`.
+This is useful when the value is prior written by middleware.
+
+Instead of mapping each property, you can use the following:
+
+```php
+use \Yiisoft\Input\Http\Attribute\Data\FromQuery;
+use \Yiisoft\Input\Http\Attribute\Data\FromBody; 
+
+#[FromQuery]
+final class SearchInput
+{
+    public function __construct(
+        private string $query,
+        private string $category,
+    ) {}
+    
+    // getters
+}
+
+#[FromBody]
+final class CreateUserInput
+{
+    public function __construct(
+        private string $username,
+        private string $email,
+    ) {}
+    
+    // getters
+}
+```
+
+`SearchInput` will be mapped from query parameters, `CreateUserInput` will be mapped from parsed request body.
+Both will expect request parameters in request named same as DTO properties.
 
 ## Testing
 

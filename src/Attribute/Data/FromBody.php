@@ -9,14 +9,22 @@ use Yiisoft\Hydrator\DataAttributeInterface;
 use Yiisoft\Hydrator\HydratorInterface;
 
 /**
+ * Take data for the input DTO from the request body.
+ *
  * @psalm-import-type MapType from HydratorInterface
  */
 #[Attribute(Attribute::TARGET_CLASS)]
 final class FromBody implements DataAttributeInterface
 {
     /**
+     * @param string|array|null $name The field in the request body to get data from.
+     * Array means a path.
+     * For example, `['user', 'name']` will get data from `$body['user']['name']`.
+     * If `null`, the whole body will be used.
      * @psalm-param string|list<string>|null $name
+     * @param array $map Map of the input DTO property names to the request body data keys.
      * @psalm-param MapType $map
+     * @param bool $strict Whether to throw an exception if the request body contains data that isn't in the map.
      */
     public function __construct(
         private string|array|null $name = null,
@@ -26,6 +34,13 @@ final class FromBody implements DataAttributeInterface
     }
 
     /**
+     * Get the name of the field in the request body to get data from.
+     *
+     * Array means a path.
+     * For example, `['user', 'name']` will get data from `$body['user']['name']`.
+     * If `null`, the whole body will be used.
+     *
+     * @return string|array|null The field in the request body to get data from.
      * @psalm-return string|list<string>|null
      */
     public function getName(): string|array|null
@@ -34,6 +49,9 @@ final class FromBody implements DataAttributeInterface
     }
 
     /**
+     * Get the map of the input DTO property names to the request body data keys.
+     *
+     * @return array Map of the input DTO property names to the request body data keys.
      * @psalm-return MapType
      */
     public function getMap(): array
@@ -41,6 +59,9 @@ final class FromBody implements DataAttributeInterface
         return $this->map;
     }
 
+    /**
+     * @return bool Whether to throw an exception if the request body contains data that isn't in the map.
+     */
     public function isStrict(): bool
     {
         return $this->strict;

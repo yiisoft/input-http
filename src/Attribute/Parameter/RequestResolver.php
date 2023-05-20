@@ -12,8 +12,14 @@ use Yiisoft\Hydrator\ParameterAttributeResolverInterface;
 use Yiisoft\Hydrator\UnexpectedAttributeException;
 use Yiisoft\Input\Http\Request\RequestProviderInterface;
 
+/**
+ * Resolver for {@see Request} attribute.
+ */
 final class RequestResolver implements ParameterAttributeResolverInterface
 {
+    /**
+     * @param RequestProviderInterface $requestProvider The request provider.
+     */
     public function __construct(
         private RequestProviderInterface $requestProvider
     ) {
