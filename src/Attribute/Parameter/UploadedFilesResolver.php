@@ -30,10 +30,7 @@ final class UploadedFilesResolver implements ParameterAttributeResolverInterface
 
         $files = $this->requestProvider->get()->getUploadedFiles();
 
-        $name = $attribute->getName();
-        if ($name === null) {
-            return $files;
-        }
+        $name = $attribute->getName() ?? $context->getParameter()->getName();
 
         if (!ArrayHelper::pathExists($files, $name)) {
             throw new NotResolvedException();

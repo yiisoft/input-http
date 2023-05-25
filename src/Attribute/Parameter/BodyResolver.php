@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Yiisoft\Input\Http\Attribute\Parameter;
 
 use Yiisoft\Arrays\ArrayHelper;
-
 use Yiisoft\Hydrator\Context;
 use Yiisoft\Hydrator\NotResolvedException;
 use Yiisoft\Hydrator\ParameterAttributeInterface;
@@ -30,10 +29,7 @@ final class BodyResolver implements ParameterAttributeResolverInterface
 
         $parsedBody = $this->requestProvider->get()->getParsedBody();
 
-        $name = $attribute->getName();
-        if ($name === null) {
-            return $parsedBody;
-        }
+        $name = $attribute->getName() ?? $context->getParameter()->getName();
 
         if (!is_array($parsedBody)) {
             throw new NotResolvedException();

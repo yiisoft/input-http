@@ -27,10 +27,7 @@ final class RequestResolver implements ParameterAttributeResolverInterface
 
         $requestAttributes = $this->requestProvider->get()->getAttributes();
 
-        $name = $attribute->getName();
-        if ($name === null) {
-            return $requestAttributes;
-        }
+        $name = $attribute->getName() ?? $context->getParameter()->getName();
 
         if (!ArrayHelper::pathExists($requestAttributes, $name)) {
             throw new NotResolvedException();
