@@ -23,7 +23,7 @@ final class BodyTest extends TestCase
         $hydrator = $this->createHydrator([
             'a' => 'one',
             'b' => 'two',
-            'c' => 'three'
+            'c' => 'three',
         ]);
 
         $input = new class () {
