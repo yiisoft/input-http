@@ -27,10 +27,7 @@ final class QueryResolver implements ParameterAttributeResolverInterface
 
         $params = $this->requestProvider->get()->getQueryParams();
 
-        $name = $attribute->getName();
-        if ($name === null) {
-            return $params;
-        }
+        $name = $attribute->getName() ?? $context->getParameter()->getName();
 
         if (!ArrayHelper::pathExists($params, $name)) {
             throw new NotResolvedException();

@@ -23,6 +23,7 @@ final class RequestTest extends TestCase
         $hydrator = $this->createHydrator([
             'a' => 'one',
             'b' => 'two',
+            'c' => 'three',
         ]);
 
         $input = new class () {
@@ -31,14 +32,14 @@ final class RequestTest extends TestCase
             #[Request('b')]
             public string $b = '';
             #[Request]
-            public array $all = [];
+            public string $c = '';
         };
 
         $hydrator->hydrate($input);
 
         $this->assertSame('one', $input->a);
         $this->assertSame('two', $input->b);
-        $this->assertSame(['a' => 'one', 'b' => 'two'], $input->all);
+        $this->assertSame('three', $input->c);
     }
 
     public function testWithoutBody(): void
@@ -51,14 +52,14 @@ final class RequestTest extends TestCase
             #[Request('b')]
             public string $b = '';
             #[Request]
-            public array $all = [];
+            public string $c = '';
         };
 
         $hydrator->hydrate($input);
 
         $this->assertSame('', $input->a);
         $this->assertSame('', $input->b);
-        $this->assertSame([], $input->all);
+        $this->assertSame('', $input->c);
     }
 
     public function testNonExistPath(): void

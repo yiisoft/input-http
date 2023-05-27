@@ -23,10 +23,12 @@ final class UploadedFilesTest extends TestCase
     {
         $file1 = $this->createMock(UploadedFileInterface::class);
         $file2 = $this->createMock(UploadedFileInterface::class);
+        $file3 = $this->createMock(UploadedFileInterface::class);
 
         $hydrator = $this->createHydrator([
             'a' => $file1,
             'b' => $file2,
+            'c' => $file3,
         ]);
 
         $input = new class () {
@@ -35,14 +37,14 @@ final class UploadedFilesTest extends TestCase
             #[UploadedFiles('b')]
             public ?UploadedFileInterface $b = null;
             #[UploadedFiles]
-            public array $all = [];
+            public ?UploadedFileInterface $c = null;
         };
 
         $hydrator->hydrate($input);
 
         $this->assertSame($file1, $input->a);
         $this->assertSame($file2, $input->b);
-        $this->assertSame(['a' => $file1, 'b' => $file2], $input->all);
+        $this->assertSame($file3, $input->c);
     }
 
     public function testWithoutBody(): void
@@ -55,14 +57,14 @@ final class UploadedFilesTest extends TestCase
             #[UploadedFiles('b')]
             public ?UploadedFileInterface $b = null;
             #[UploadedFiles]
-            public array $all = [];
+            public ?UploadedFileInterface $c = null;
         };
 
         $hydrator->hydrate($input);
 
         $this->assertNull($input->a);
         $this->assertNull($input->b);
-        $this->assertSame([], $input->all);
+        $this->assertNull($input->c);
     }
 
     public function testNonExistPath(): void
