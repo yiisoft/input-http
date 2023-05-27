@@ -6,10 +6,10 @@ namespace Yiisoft\Input\Http\Attribute\Parameter;
 
 use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Hydrator\Context;
-use Yiisoft\Hydrator\NotResolvedException;
 use Yiisoft\Hydrator\ParameterAttributeInterface;
 use Yiisoft\Hydrator\ParameterAttributeResolverInterface;
 use Yiisoft\Hydrator\UnexpectedAttributeException;
+use Yiisoft\Hydrator\Value;
 use Yiisoft\Input\Http\Request\RequestProviderInterface;
 
 use function is_array;
@@ -21,7 +21,7 @@ final class BodyResolver implements ParameterAttributeResolverInterface
     ) {
     }
 
-    public function getParameterValue(ParameterAttributeInterface $attribute, Context $context): mixed
+    public function getParameterValue(ParameterAttributeInterface $attribute, Context $context): Value
     {
         if (!$attribute instanceof Body) {
             throw new UnexpectedAttributeException(Body::class, $attribute);
@@ -32,13 +32,13 @@ final class BodyResolver implements ParameterAttributeResolverInterface
         $name = $attribute->getName() ?? $context->getParameter()->getName();
 
         if (!is_array($parsedBody)) {
-            throw new NotResolvedException();
+            return Value::fail();
         }
 
         if (!ArrayHelper::pathExists($parsedBody, $name)) {
-            throw new NotResolvedException();
+            return Value::fail();
         }
 
-        return ArrayHelper::getValueByPath($parsedBody, $name);
+        return Value::success(ArrayHelper::getValueByPath($parsedBody, $name));
     }
 }

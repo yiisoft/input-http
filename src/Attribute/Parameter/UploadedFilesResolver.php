@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace Yiisoft\Input\Http\Attribute\Parameter;
 
-use Psr\Http\Message\UploadedFileInterface;
 use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Hydrator\Context;
-use Yiisoft\Hydrator\NotResolvedException;
 use Yiisoft\Hydrator\ParameterAttributeInterface;
 use Yiisoft\Hydrator\ParameterAttributeResolverInterface;
 use Yiisoft\Hydrator\UnexpectedAttributeException;
+use Yiisoft\Hydrator\Value;
 use Yiisoft\Input\Http\Request\RequestProviderInterface;
 
 final class UploadedFilesResolver implements ParameterAttributeResolverInterface
@@ -23,7 +22,7 @@ final class UploadedFilesResolver implements ParameterAttributeResolverInterface
     public function getParameterValue(
         ParameterAttributeInterface $attribute,
         Context $context
-    ): array|UploadedFileInterface {
+    ): Value {
         if (!$attribute instanceof UploadedFiles) {
             throw new UnexpectedAttributeException(UploadedFiles::class, $attribute);
         }
@@ -33,10 +32,9 @@ final class UploadedFilesResolver implements ParameterAttributeResolverInterface
         $name = $attribute->getName() ?? $context->getParameter()->getName();
 
         if (!ArrayHelper::pathExists($files, $name)) {
-            throw new NotResolvedException();
+            return Value::fail();
         }
 
-        /** @var UploadedFileInterface */
-        return ArrayHelper::getValueByPath($files, $name);
+        return Value::success(ArrayHelper::getValueByPath($files, $name));
     }
 }
