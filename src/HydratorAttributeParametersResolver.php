@@ -6,7 +6,6 @@ namespace Yiisoft\Input\Http;
 
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Yiisoft\Hydrator\NotResolvedException;
 use Yiisoft\Hydrator\ParameterAttributesHandler;
 use Yiisoft\Hydrator\TypeCaster\SimpleTypeCaster;
 use Yiisoft\Hydrator\TypeCasterInterface;
@@ -28,13 +27,10 @@ final class HydratorAttributeParametersResolver implements ParametersResolverInt
         $result = [];
 
         foreach ($parameters as $parameter) {
-            try {
-                $value = $this->handler->handle($parameter);
-            } catch (NotResolvedException) {
-                continue;
+            $handleResult = $this->handler->handle($parameter);
+            if ($handleResult->isResolved()) {
+                $result[$parameter->getName()] = $handleResult->getValue();
             }
-
-            $result[$parameter->getName()] = $value;
         }
 
         return $result;
