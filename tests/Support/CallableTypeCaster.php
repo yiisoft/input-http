@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Yiisoft\Input\Http\Tests\Support;
 
 use ReflectionType;
+use Yiisoft\Hydrator\Result;
 use Yiisoft\Hydrator\TypeCasterInterface;
-use Yiisoft\Hydrator\Value;
 
 final class CallableTypeCaster implements TypeCasterInterface
 {
@@ -15,8 +15,8 @@ final class CallableTypeCaster implements TypeCasterInterface
     ) {
     }
 
-    public function cast(mixed $value, ?ReflectionType $type): Value
+    public function cast(mixed $value, ?ReflectionType $type): Result
     {
-        return Value::success(($this->callable)($value));
+        return Result::success(($this->callable)($value));
     }
 }

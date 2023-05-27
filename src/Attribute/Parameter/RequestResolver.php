@@ -8,8 +8,8 @@ use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Hydrator\Context;
 use Yiisoft\Hydrator\ParameterAttributeInterface;
 use Yiisoft\Hydrator\ParameterAttributeResolverInterface;
+use Yiisoft\Hydrator\Result;
 use Yiisoft\Hydrator\UnexpectedAttributeException;
-use Yiisoft\Hydrator\Value;
 use Yiisoft\Input\Http\Request\RequestProviderInterface;
 
 final class RequestResolver implements ParameterAttributeResolverInterface
@@ -19,7 +19,7 @@ final class RequestResolver implements ParameterAttributeResolverInterface
     ) {
     }
 
-    public function getParameterValue(ParameterAttributeInterface $attribute, Context $context): Value
+    public function getParameterValue(ParameterAttributeInterface $attribute, Context $context): Result
     {
         if (!$attribute instanceof Request) {
             throw new UnexpectedAttributeException(Request::class, $attribute);
@@ -30,9 +30,9 @@ final class RequestResolver implements ParameterAttributeResolverInterface
         $name = $attribute->getName() ?? $context->getParameter()->getName();
 
         if (!ArrayHelper::pathExists($requestAttributes, $name)) {
-            return Value::fail();
+            return Result::fail();
         }
 
-        return Value::success(ArrayHelper::getValueByPath($requestAttributes, $name));
+        return Result::success(ArrayHelper::getValueByPath($requestAttributes, $name));
     }
 }

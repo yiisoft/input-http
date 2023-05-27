@@ -8,8 +8,8 @@ use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Hydrator\Context;
 use Yiisoft\Hydrator\ParameterAttributeInterface;
 use Yiisoft\Hydrator\ParameterAttributeResolverInterface;
+use Yiisoft\Hydrator\Result;
 use Yiisoft\Hydrator\UnexpectedAttributeException;
-use Yiisoft\Hydrator\Value;
 use Yiisoft\Input\Http\Request\RequestProviderInterface;
 
 final class UploadedFilesResolver implements ParameterAttributeResolverInterface
@@ -19,10 +19,8 @@ final class UploadedFilesResolver implements ParameterAttributeResolverInterface
     ) {
     }
 
-    public function getParameterValue(
-        ParameterAttributeInterface $attribute,
-        Context $context
-    ): Value {
+    public function getParameterValue(ParameterAttributeInterface $attribute, Context $context): Result
+    {
         if (!$attribute instanceof UploadedFiles) {
             throw new UnexpectedAttributeException(UploadedFiles::class, $attribute);
         }
@@ -32,9 +30,9 @@ final class UploadedFilesResolver implements ParameterAttributeResolverInterface
         $name = $attribute->getName() ?? $context->getParameter()->getName();
 
         if (!ArrayHelper::pathExists($files, $name)) {
-            return Value::fail();
+            return Result::fail();
         }
 
-        return Value::success(ArrayHelper::getValueByPath($files, $name));
+        return Result::success(ArrayHelper::getValueByPath($files, $name));
     }
 }

@@ -10,9 +10,9 @@ use ReflectionFunction;
 use ReflectionParameter;
 use Yiisoft\Hydrator\Context;
 use Yiisoft\Hydrator\Hydrator;
+use Yiisoft\Hydrator\Result;
 use Yiisoft\Hydrator\Validator\Attribute\ValidateResolver;
 use Yiisoft\Hydrator\Validator\ValidatingHydrator;
-use Yiisoft\Hydrator\Value;
 use Yiisoft\Input\Http\Attribute\Data\FromQueryResolver;
 use Yiisoft\Input\Http\Request\RequestProvider;
 use Yiisoft\Input\Http\RequestInputParametersResolver;
@@ -23,7 +23,7 @@ final class TestHelper
 {
     public static function createContext(): Context
     {
-        return new Context(self::getParameters(static fn(int $a) => null)['a'], Value::fail(), [], []);
+        return new Context(self::getParameters(static fn(int $a) => null)['a'], Result::fail(), [], []);
     }
 
     /**
