@@ -6,8 +6,14 @@ namespace Yiisoft\Input\Http\Request;
 
 use Psr\Http\Message\ServerRequestInterface;
 
+/**
+ * Stores request for further consumption by attribute handlers.
+ */
 final class RequestProvider implements RequestProviderInterface
 {
+    /**
+     * @var ServerRequestInterface|null The request.
+     */
     private ?ServerRequestInterface $request = null;
 
     public function set(ServerRequestInterface $request): void

@@ -13,8 +13,14 @@ use Yiisoft\Input\Http\Request\RequestProviderInterface;
 
 use function is_array;
 
+/**
+ * Resolver for {@see FromQuery} attribute.
+ */
 final class FromQueryResolver implements DataAttributeResolverInterface
 {
+    /**
+     * @param RequestProviderInterface $requestProvider The request provider.
+     */
     public function __construct(
         private RequestProviderInterface $requestProvider,
     ) {

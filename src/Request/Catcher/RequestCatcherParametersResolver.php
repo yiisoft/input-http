@@ -10,6 +10,9 @@ use Yiisoft\Middleware\Dispatcher\ParametersResolverInterface;
 
 final class RequestCatcherParametersResolver implements ParametersResolverInterface
 {
+    /**
+     * @param RequestProviderInterface $provider The request provider.
+     */
     public function __construct(
         private RequestProviderInterface $provider,
     ) {
