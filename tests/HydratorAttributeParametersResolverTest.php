@@ -14,7 +14,6 @@ use Yiisoft\Input\Http\HydratorAttributeParametersResolver;
 use Yiisoft\Input\Http\Request\RequestProvider;
 use Yiisoft\Input\Http\Tests\Support\CallableTypeCaster;
 use Yiisoft\Input\Http\Tests\Support\TestHelper;
-use Yiisoft\Test\Support\Container\SimpleContainer;
 
 final class HydratorAttributeParametersResolverTest extends TestCase
 {

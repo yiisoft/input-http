@@ -22,8 +22,7 @@ final class RequestResolver implements ParameterAttributeResolverInterface
     public function getParameterValue(
         ParameterAttributeInterface $attribute,
         ParameterAttributeResolveContext $context,
-    ): Result
-    {
+    ): Result {
         if (!$attribute instanceof Request) {
             throw new UnexpectedAttributeException(Request::class, $attribute);
         }

@@ -22,8 +22,7 @@ final class QueryResolver implements ParameterAttributeResolverInterface
     public function getParameterValue(
         ParameterAttributeInterface $attribute,
         ParameterAttributeResolveContext $context,
-    ): Result
-    {
+    ): Result {
         if (!$attribute instanceof Query) {
             throw new UnexpectedAttributeException(Query::class, $attribute);
         }

@@ -22,8 +22,7 @@ final class UploadedFilesResolver implements ParameterAttributeResolverInterface
     public function getParameterValue(
         ParameterAttributeInterface $attribute,
         ParameterAttributeResolveContext $context,
-    ): Result
-    {
+    ): Result {
         if (!$attribute instanceof UploadedFiles) {
             throw new UnexpectedAttributeException(UploadedFiles::class, $attribute);
         }
