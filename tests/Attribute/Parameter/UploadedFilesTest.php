@@ -7,15 +7,14 @@ namespace Yiisoft\Input\Http\Tests\Attribute\Parameter;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\UploadedFileInterface;
+use Yiisoft\Hydrator\AttributeHandling\Exception\UnexpectedAttributeException;
 use Yiisoft\Hydrator\Hydrator;
-use Yiisoft\Hydrator\UnexpectedAttributeException;
 use Yiisoft\Input\Http\Attribute\Parameter\Body;
 use Yiisoft\Input\Http\Attribute\Parameter\UploadedFiles;
 use Yiisoft\Input\Http\Attribute\Parameter\UploadedFilesResolver;
 use Yiisoft\Input\Http\Request\RequestProvider;
 use Yiisoft\Input\Http\Request\RequestProviderInterface;
 use Yiisoft\Input\Http\Tests\Support\TestHelper;
-use Yiisoft\Test\Support\Container\SimpleContainer;
 
 final class UploadedFilesTest extends TestCase
 {
@@ -89,7 +88,7 @@ final class UploadedFilesTest extends TestCase
         $resolver = new UploadedFilesResolver($this->createMock(RequestProviderInterface::class));
 
         $attribute = new Body();
-        $context = TestHelper::createContext();
+        $context = TestHelper::createParameterAttributeResolveContext();
 
         $this->expectException(UnexpectedAttributeException::class);
         $this->expectExceptionMessage('Expected "' . UploadedFiles::class . '", but "' . Body::class . '" given.');
@@ -104,10 +103,8 @@ final class UploadedFilesTest extends TestCase
         $requestProvider = new RequestProvider();
         $requestProvider->set($request);
 
-        return new Hydrator(
-            new SimpleContainer([
-                UploadedFilesResolver::class => new UploadedFilesResolver($requestProvider),
-            ]),
-        );
+        return TestHelper::createHydrator([
+            UploadedFilesResolver::class => new UploadedFilesResolver($requestProvider),
+        ]);
     }
 }

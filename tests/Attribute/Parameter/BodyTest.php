@@ -6,15 +6,14 @@ namespace Yiisoft\Input\Http\Tests\Attribute\Parameter;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
+use Yiisoft\Hydrator\AttributeHandling\Exception\UnexpectedAttributeException;
 use Yiisoft\Hydrator\Hydrator;
-use Yiisoft\Hydrator\UnexpectedAttributeException;
 use Yiisoft\Input\Http\Attribute\Parameter\Body;
 use Yiisoft\Input\Http\Attribute\Parameter\BodyResolver;
 use Yiisoft\Input\Http\Attribute\Parameter\Query;
 use Yiisoft\Input\Http\Request\RequestProvider;
 use Yiisoft\Input\Http\Request\RequestProviderInterface;
 use Yiisoft\Input\Http\Tests\Support\TestHelper;
-use Yiisoft\Test\Support\Container\SimpleContainer;
 
 final class BodyTest extends TestCase
 {
@@ -84,7 +83,7 @@ final class BodyTest extends TestCase
         $resolver = new BodyResolver($this->createMock(RequestProviderInterface::class));
 
         $attribute = new Query();
-        $context = TestHelper::createContext();
+        $context = TestHelper::createParameterAttributeResolveContext();
 
         $this->expectException(UnexpectedAttributeException::class);
         $this->expectExceptionMessage('Expected "' . Body::class . '", but "' . Query::class . '" given.');
@@ -99,10 +98,8 @@ final class BodyTest extends TestCase
         $requestProvider = new RequestProvider();
         $requestProvider->set($request);
 
-        return new Hydrator(
-            new SimpleContainer([
-                BodyResolver::class => new BodyResolver($requestProvider),
-            ]),
-        );
+        return TestHelper::createHydrator([
+            BodyResolver::class => new BodyResolver($requestProvider),
+        ]);
     }
 }

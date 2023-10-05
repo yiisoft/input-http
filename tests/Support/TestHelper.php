@@ -8,11 +8,16 @@ use Closure;
 use Psr\Http\Message\ServerRequestInterface;
 use ReflectionFunction;
 use ReflectionParameter;
-use Yiisoft\Hydrator\Context;
+use Yiisoft\Hydrator\ArrayData;
+use Yiisoft\Hydrator\AttributeHandling\ParameterAttributeResolveContext;
+use Yiisoft\Hydrator\AttributeHandling\ParameterAttributesHandler;
+use Yiisoft\Hydrator\AttributeHandling\ResolverFactory\ContainerAttributeResolverFactory;
 use Yiisoft\Hydrator\Hydrator;
+use Yiisoft\Hydrator\ObjectFactory\ContainerObjectFactory;
 use Yiisoft\Hydrator\Result;
 use Yiisoft\Hydrator\Validator\Attribute\ValidateResolver;
 use Yiisoft\Hydrator\Validator\ValidatingHydrator;
+use Yiisoft\Injector\Injector;
 use Yiisoft\Input\Http\Attribute\Data\FromQueryResolver;
 use Yiisoft\Input\Http\Request\RequestProvider;
 use Yiisoft\Input\Http\RequestInputParametersResolver;
@@ -21,9 +26,41 @@ use Yiisoft\Validator\Validator;
 
 final class TestHelper
 {
-    public static function createContext(): Context
+    public static function createHydrator(?array $definitions = null): Hydrator
     {
-        return new Context(self::getParameters(static fn(int $a) => null)['a'], Result::fail(), [], []);
+        if ($definitions === null) {
+            return new Hydrator();
+        }
+
+        $container = new SimpleContainer(
+            $definitions,
+            static fn(string $class) => new $class(),
+        );
+
+        return new Hydrator(
+            attributeResolverFactory: new ContainerAttributeResolverFactory($container),
+            objectFactory: new ContainerObjectFactory(
+                new Injector($container)
+            ),
+        );
+    }
+
+    public static function createParameterAttributesHandler(array $definitions): ParameterAttributesHandler
+    {
+        return new ParameterAttributesHandler(
+            new ContainerAttributeResolverFactory(
+                new SimpleContainer($definitions)
+            )
+        );
+    }
+
+    public static function createParameterAttributeResolveContext(): ParameterAttributeResolveContext
+    {
+        return new ParameterAttributeResolveContext(
+            self::getParameters(static fn(int $a) => null)['a'],
+            Result::fail(),
+            new ArrayData(),
+        );
     }
 
     /**
@@ -51,21 +88,17 @@ final class TestHelper
 
         $validator = new Validator();
         $validateResolver = new ValidateResolver($validator);
-        $container = new SimpleContainer(
-            [
-                ValidateResolver::class => $validateResolver,
-                FromQueryResolver::class => new FromQueryResolver($requestProvider),
-            ],
-        );
+        $hydrator = self::createHydrator([
+            ValidateResolver::class => $validateResolver,
+            FromQueryResolver::class => new FromQueryResolver($requestProvider),
+        ]);
 
         if ($useValidatingHydrator) {
             $hydrator = new ValidatingHydrator(
-                new Hydrator($container),
+                $hydrator,
                 $validator,
                 $validateResolver,
             );
-        } else {
-            $hydrator = new Hydrator($container);
         }
 
         return new RequestInputParametersResolver(

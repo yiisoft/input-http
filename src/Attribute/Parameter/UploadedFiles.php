@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Yiisoft\Input\Http\Attribute\Parameter;
 
 use Attribute;
-use Yiisoft\Hydrator\ParameterAttributeInterface;
+use Yiisoft\Hydrator\Attribute\Parameter\ParameterAttributeInterface;
 
 #[Attribute(Attribute::TARGET_PROPERTY | Attribute::TARGET_PARAMETER)]
 final class UploadedFiles implements ParameterAttributeInterface

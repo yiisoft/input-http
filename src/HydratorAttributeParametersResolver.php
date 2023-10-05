@@ -4,22 +4,29 @@ declare(strict_types=1);
 
 namespace Yiisoft\Input\Http;
 
-use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Yiisoft\Hydrator\ParameterAttributesHandler;
-use Yiisoft\Hydrator\TypeCaster\SimpleTypeCaster;
-use Yiisoft\Hydrator\TypeCasterInterface;
+use ReflectionParameter;
+use Yiisoft\Hydrator\AttributeHandling\ParameterAttributesHandler;
+use Yiisoft\Hydrator\Hydrator;
+use Yiisoft\Hydrator\HydratorInterface;
+use Yiisoft\Hydrator\Result;
+use Yiisoft\Hydrator\TypeCaster\PhpNativeTypeCaster;
+use Yiisoft\Hydrator\TypeCaster\TypeCastContext;
+use Yiisoft\Hydrator\TypeCaster\TypeCasterInterface;
 use Yiisoft\Middleware\Dispatcher\ParametersResolverInterface;
 
 final class HydratorAttributeParametersResolver implements ParametersResolverInterface
 {
-    private ParameterAttributesHandler $handler;
+    private TypeCasterInterface $typeCaster;
+    private HydratorInterface $hydrator;
 
     public function __construct(
-        ContainerInterface $container,
+        private ParameterAttributesHandler $handler,
         ?TypeCasterInterface $typeCaster = null,
+        ?HydratorInterface $hydrator = null,
     ) {
-        $this->handler = new ParameterAttributesHandler($container, $typeCaster ?? new SimpleTypeCaster());
+        $this->typeCaster = $typeCaster ?? new PhpNativeTypeCaster();
+        $this->hydrator = $hydrator ?? new Hydrator(typeCaster: $this->typeCaster);
     }
 
     public function resolve(array $parameters, ServerRequestInterface $request): array
@@ -29,10 +36,22 @@ final class HydratorAttributeParametersResolver implements ParametersResolverInt
         foreach ($parameters as $parameter) {
             $handleResult = $this->handler->handle($parameter);
             if ($handleResult->isResolved()) {
-                $result[$parameter->getName()] = $handleResult->getValue();
+                $result[$parameter->getName()] = $this->prepareValue($handleResult, $parameter);
             }
         }
 
         return $result;
+    }
+
+    public function prepareValue(Result $handleResult, ReflectionParameter $parameter): mixed
+    {
+        $value = $handleResult->getValue();
+
+        $typeCastResult = $this->typeCaster->cast(
+            $value,
+            new TypeCastContext($this->hydrator, $parameter)
+        );
+
+        return $typeCastResult->isResolved() ? $typeCastResult->getValue() : $value;
     }
 }

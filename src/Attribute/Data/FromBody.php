@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Yiisoft\Input\Http\Attribute\Data;
 
 use Attribute;
-use Yiisoft\Hydrator\DataAttributeInterface;
-use Yiisoft\Hydrator\HydratorInterface;
+use Yiisoft\Hydrator\ArrayData;
+use Yiisoft\Hydrator\Attribute\Data\DataAttributeInterface;
 
 /**
- * @psalm-import-type MapType from HydratorInterface
+ * @psalm-import-type MapType from ArrayData
  */
 #[Attribute(Attribute::TARGET_CLASS)]
 final class FromBody implements DataAttributeInterface

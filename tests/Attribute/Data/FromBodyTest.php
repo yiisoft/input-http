@@ -6,9 +6,9 @@ namespace Yiisoft\Input\Http\Tests\Attribute\Data;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
-use Yiisoft\Hydrator\Data;
+use Yiisoft\Hydrator\ArrayData;
+use Yiisoft\Hydrator\AttributeHandling\Exception\UnexpectedAttributeException;
 use Yiisoft\Hydrator\Hydrator;
-use Yiisoft\Hydrator\UnexpectedAttributeException;
 use Yiisoft\Input\Http\Attribute\Data\FromBody;
 use Yiisoft\Input\Http\Attribute\Data\FromBodyResolver;
 use Yiisoft\Input\Http\Attribute\Data\FromQuery;
@@ -16,7 +16,7 @@ use Yiisoft\Input\Http\Request\RequestProvider;
 use Yiisoft\Input\Http\Request\RequestProviderInterface;
 use Yiisoft\Input\Http\Tests\Support\Input\FromBodyInput;
 use Yiisoft\Input\Http\Tests\Support\Input\FromBodyNestedInput;
-use Yiisoft\Test\Support\Container\SimpleContainer;
+use Yiisoft\Input\Http\Tests\Support\TestHelper;
 
 final class FromBodyTest extends TestCase
 {
@@ -65,7 +65,7 @@ final class FromBodyTest extends TestCase
         $resolver = new FromBodyResolver($this->createMock(RequestProviderInterface::class));
 
         $attribute = new FromQuery();
-        $data = new Data();
+        $data = new ArrayData();
 
         $this->expectException(UnexpectedAttributeException::class);
         $this->expectExceptionMessage('Expected "' . FromBody::class . '", but "' . FromQuery::class . '" given.');
@@ -80,10 +80,8 @@ final class FromBodyTest extends TestCase
         $requestProvider = new RequestProvider();
         $requestProvider->set($request);
 
-        return new Hydrator(
-            new SimpleContainer([
-                FromBodyResolver::class => new FromBodyResolver($requestProvider),
-            ]),
-        );
+        return TestHelper::createHydrator([
+            FromBodyResolver::class => new FromBodyResolver($requestProvider),
+        ]);
     }
 }
