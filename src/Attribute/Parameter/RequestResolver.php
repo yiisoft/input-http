@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Yiisoft\Input\Http\Attribute\Parameter;
 
 use Yiisoft\Arrays\ArrayHelper;
-use Yiisoft\Hydrator\Context;
-use Yiisoft\Hydrator\ParameterAttributeInterface;
-use Yiisoft\Hydrator\ParameterAttributeResolverInterface;
+use Yiisoft\Hydrator\Attribute\Parameter\ParameterAttributeInterface;
+use Yiisoft\Hydrator\Attribute\Parameter\ParameterAttributeResolverInterface;
+use Yiisoft\Hydrator\AttributeHandling\Exception\UnexpectedAttributeException;
+use Yiisoft\Hydrator\AttributeHandling\ParameterAttributeResolveContext;
 use Yiisoft\Hydrator\Result;
-use Yiisoft\Hydrator\UnexpectedAttributeException;
 use Yiisoft\Input\Http\Request\RequestProviderInterface;
 
 final class RequestResolver implements ParameterAttributeResolverInterface
@@ -19,7 +19,10 @@ final class RequestResolver implements ParameterAttributeResolverInterface
     ) {
     }
 
-    public function getParameterValue(ParameterAttributeInterface $attribute, Context $context): Result
+    public function getParameterValue(
+        ParameterAttributeInterface $attribute,
+        ParameterAttributeResolveContext $context,
+    ): Result
     {
         if (!$attribute instanceof Request) {
             throw new UnexpectedAttributeException(Request::class, $attribute);

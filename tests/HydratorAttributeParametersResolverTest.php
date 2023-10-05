@@ -28,10 +28,10 @@ final class HydratorAttributeParametersResolverTest extends TestCase
         $requestProvider->set($request);
 
         $resolver = new HydratorAttributeParametersResolver(
-            new SimpleContainer([
+            TestHelper::createParameterAttributesHandler([
                 QueryResolver::class => new QueryResolver($requestProvider),
                 BodyResolver::class => new BodyResolver($requestProvider),
-            ]),
+            ])
         );
 
         $parameters = TestHelper::getParameters(
@@ -61,7 +61,7 @@ final class HydratorAttributeParametersResolverTest extends TestCase
         $requestProvider->set($request);
 
         $resolver = new HydratorAttributeParametersResolver(
-            new SimpleContainer([
+            TestHelper::createParameterAttributesHandler([
                 QueryResolver::class => new QueryResolver($requestProvider),
             ]),
             new CallableTypeCaster(
