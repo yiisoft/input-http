@@ -50,15 +50,15 @@ final class RequestInputParametersResolverTest extends TestCase
         return [
             [
                 ['person' => PersonInput::class, 'simple' => SimpleRequestInput::class],
-                static fn(PersonInput $person, SimpleRequestInput $simple) => null
+                static fn(PersonInput $person, SimpleRequestInput $simple) => null,
             ],
             [
                 ['person' => PersonInput::class],
-                static fn(PersonInput $person, PureObject $object) => null
+                static fn(PersonInput $person, PureObject $object) => null,
             ],
             [
                 ['simple' => SimpleRequestInput::class],
-                static fn(PureObject|SimpleRequestInput $object, SimpleRequestInput $simple) => null
+                static fn(PureObject|SimpleRequestInput $object, SimpleRequestInput $simple) => null,
             ],
         ];
     }
