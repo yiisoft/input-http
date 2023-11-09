@@ -81,7 +81,7 @@ final class TestHelper
     public static function createRequestInputParametersResolver(
         ServerRequestInterface $request,
         bool $useValidatingHydrator = true,
-        bool $throwInputValidationException = false,
+        ?bool $throwInputValidationException = null,
     ): RequestInputParametersResolver {
         $requestProvider = new RequestProvider();
         $requestProvider->set($request);
@@ -101,9 +101,8 @@ final class TestHelper
             );
         }
 
-        return new RequestInputParametersResolver(
-            $hydrator,
-            $throwInputValidationException,
-        );
+        return $throwInputValidationException === null
+            ? new RequestInputParametersResolver($hydrator)
+            : new RequestInputParametersResolver($hydrator, $throwInputValidationException);
     }
 }

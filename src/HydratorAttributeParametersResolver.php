@@ -43,7 +43,7 @@ final class HydratorAttributeParametersResolver implements ParametersResolverInt
         return $result;
     }
 
-    public function prepareValue(Result $handleResult, ReflectionParameter $parameter): mixed
+    private function prepareValue(Result $handleResult, ReflectionParameter $parameter): mixed
     {
         $value = $handleResult->getValue();
 

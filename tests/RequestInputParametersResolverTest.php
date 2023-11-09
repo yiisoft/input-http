@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Yiisoft\Input\Http\Tests;
 
+use Closure;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 use Yiisoft\Input\Http\InputValidationException;
 use Yiisoft\Input\Http\Tests\Support\Input\PersonInput;
 use Yiisoft\Input\Http\Tests\Support\Input\SimpleRequestInput;
+use Yiisoft\Input\Http\Tests\Support\PureObject;
 use Yiisoft\Input\Http\Tests\Support\TestHelper;
 
 final class RequestInputParametersResolverTest extends TestCase
@@ -16,24 +18,69 @@ final class RequestInputParametersResolverTest extends TestCase
     public function testBase(): void
     {
         $request = $this->createMock(ServerRequestInterface::class);
-        $request->method('getQueryParams')->willReturn([]);
+        $request->method('getQueryParams')->willReturn(['a' => '1', 'b' => '2']);
 
         $resolver = TestHelper::createRequestInputParametersResolver($request);
-        $parameters = TestHelper::getParameters(static fn(PersonInput $input) => null);
+        $parameters = TestHelper::getParameters(static fn(PersonInput $person, SimpleRequestInput $simple) => null);
 
         $result = $resolver->resolve($parameters, $request);
 
-        $this->assertSame(['input'], array_keys($result));
+        $this->assertSame(['person', 'simple'], array_keys($result));
 
-        /** @var PersonInput $input */
-        $input = $result['input'];
+        /** @var PersonInput $person */
+        $person = $result['person'];
 
-        $this->assertInstanceOf(PersonInput::class, $input);
-        $this->assertFalse($input->getValidationResult()->isValid());
+        /** @var SimpleRequestInput $simple */
+        $simple = $result['simple'];
+
+        $this->assertInstanceOf(PersonInput::class, $person);
+        $this->assertFalse($person->getValidationResult()->isValid());
         $this->assertSame(
             ['name' => ['Value cannot be blank.']],
-            $input->getValidationResult()->getErrorMessagesIndexedByPath()
+            $person->getValidationResult()->getErrorMessagesIndexedByPath()
         );
+
+        $this->assertInstanceOf(SimpleRequestInput::class, $simple);
+        $this->assertSame('1', $simple->a);
+        $this->assertSame('2', $simple->b);
+    }
+
+    public function dataParameters(): array
+    {
+        return [
+            [
+                ['person' => PersonInput::class, 'simple' => SimpleRequestInput::class],
+                static fn(PersonInput $person, SimpleRequestInput $simple) => null,
+            ],
+            [
+                ['person' => PersonInput::class],
+                static fn(PersonInput $person, PureObject $object) => null,
+            ],
+            [
+                ['simple' => SimpleRequestInput::class],
+                static fn(PureObject|SimpleRequestInput $object, SimpleRequestInput $simple) => null,
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider dataParameters
+     */
+    public function testParameters(array $expected, Closure $closure): void
+    {
+        $request = $this->createMock(ServerRequestInterface::class);
+        $request->method('getQueryParams')->willReturn(['a' => '1', 'b' => '2']);
+
+        $resolver = TestHelper::createRequestInputParametersResolver($request);
+        $parameters = TestHelper::getParameters($closure);
+
+        $result = $resolver->resolve($parameters, $request);
+
+        $this->assertSame(array_keys($expected), array_keys($result));
+
+        foreach ($result as $name => $value) {
+            $this->assertInstanceOf($expected[$name], $value);
+        }
     }
 
     public function testWithNonValidatingHydrator(): void
