@@ -34,7 +34,7 @@
         "psr/http-server-handler": "^1.0",
         "psr/http-server-middleware": "^1.0",
         "yiisoft/arrays": "^3.0",
-        "yiisoft/hydrator": "dev-master",
+        "yiisoft/hydrator": "^1.0",
         "yiisoft/hydrator-validator": "dev-master",
         "yiisoft/middleware-dispatcher": "^5.1",
         "yiisoft/validator": "^1.1"
