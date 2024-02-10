@@ -1,9 +1,15 @@
 {
     "name": "yiisoft/input-http",
     "type": "library",
-    "description": "_____",
+    "description": "Maps data from PSR-7 HTTP request to PHP DTO representing user input.",
     "keywords": [
-        "_____"
+        "yii3",
+        "input",
+        "PSR-7",
+        "request",
+        "DTO",
+        "mapping",
+        "mapper"
     ],
     "homepage": "https://www.yiiframework.com/",
     "license": "BSD-3-Clause",
