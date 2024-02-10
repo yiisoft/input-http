@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Yiisoft\Input\Http\Attribute\Parameter;
 
 use Attribute;
-use Yiisoft\Hydrator\ParameterAttributeInterface;
+use Yiisoft\Hydrator\Attribute\Parameter\ParameterAttributeInterface;
 
 /**
  * Take data for the property or attribute from uploaded files.

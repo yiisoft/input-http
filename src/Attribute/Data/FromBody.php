@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace Yiisoft\Input\Http\Attribute\Data;
 
 use Attribute;
-use Yiisoft\Hydrator\DataAttributeInterface;
-use Yiisoft\Hydrator\HydratorInterface;
+use Yiisoft\Hydrator\ArrayData;
+use Yiisoft\Hydrator\Attribute\Data\DataAttributeInterface;
 
 /**
  * Take data for the input DTO from the request body.
- *
- * @psalm-import-type MapType from HydratorInterface
+ * @psalm-import-type MapType from ArrayData
  */
 #[Attribute(Attribute::TARGET_CLASS)]
 final class FromBody implements DataAttributeInterface

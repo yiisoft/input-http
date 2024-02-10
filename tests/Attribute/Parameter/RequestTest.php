@@ -6,15 +6,14 @@ namespace Yiisoft\Input\Http\Tests\Attribute\Parameter;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
+use Yiisoft\Hydrator\AttributeHandling\Exception\UnexpectedAttributeException;
 use Yiisoft\Hydrator\Hydrator;
-use Yiisoft\Hydrator\UnexpectedAttributeException;
 use Yiisoft\Input\Http\Attribute\Parameter\Body;
 use Yiisoft\Input\Http\Attribute\Parameter\Request;
 use Yiisoft\Input\Http\Attribute\Parameter\RequestResolver;
 use Yiisoft\Input\Http\Request\RequestProvider;
 use Yiisoft\Input\Http\Request\RequestProviderInterface;
 use Yiisoft\Input\Http\Tests\Support\TestHelper;
-use Yiisoft\Test\Support\Container\SimpleContainer;
 
 final class RequestTest extends TestCase
 {
@@ -23,6 +22,7 @@ final class RequestTest extends TestCase
         $hydrator = $this->createHydrator([
             'a' => 'one',
             'b' => 'two',
+            'c' => 'three',
         ]);
 
         $input = new class () {
@@ -31,14 +31,14 @@ final class RequestTest extends TestCase
             #[Request('b')]
             public string $b = '';
             #[Request]
-            public array $all = [];
+            public string $c = '';
         };
 
         $hydrator->hydrate($input);
 
         $this->assertSame('one', $input->a);
         $this->assertSame('two', $input->b);
-        $this->assertSame(['a' => 'one', 'b' => 'two'], $input->all);
+        $this->assertSame('three', $input->c);
     }
 
     public function testWithoutBody(): void
@@ -51,14 +51,14 @@ final class RequestTest extends TestCase
             #[Request('b')]
             public string $b = '';
             #[Request]
-            public array $all = [];
+            public string $c = '';
         };
 
         $hydrator->hydrate($input);
 
         $this->assertSame('', $input->a);
         $this->assertSame('', $input->b);
-        $this->assertSame([], $input->all);
+        $this->assertSame('', $input->c);
     }
 
     public function testNonExistPath(): void
@@ -83,7 +83,7 @@ final class RequestTest extends TestCase
         $resolver = new RequestResolver($this->createMock(RequestProviderInterface::class));
 
         $attribute = new Body();
-        $context = TestHelper::createContext();
+        $context = TestHelper::createParameterAttributeResolveContext();
 
         $this->expectException(UnexpectedAttributeException::class);
         $this->expectExceptionMessage('Expected "' . Request::class . '", but "' . Body::class . '" given.');
@@ -98,10 +98,8 @@ final class RequestTest extends TestCase
         $requestProvider = new RequestProvider();
         $requestProvider->set($request);
 
-        return new Hydrator(
-            new SimpleContainer([
-                RequestResolver::class => new RequestResolver($requestProvider),
-            ]),
-        );
+        return TestHelper::createHydrator([
+            RequestResolver::class => new RequestResolver($requestProvider),
+        ]);
     }
 }
