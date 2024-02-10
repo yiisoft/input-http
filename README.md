@@ -68,7 +68,7 @@ Post id will be mapped from query parameter `id`, title and content will be mapp
 be mapped from request uploaded files.
 
 Additionally, you can fill a property from request attribute using `#[Request('attributeName')]`.
-This is useful when the value is prior written by middleware.
+This is useful when middleware prior writes the value.
 
 Instead of mapping each property, you can use the following:
 
