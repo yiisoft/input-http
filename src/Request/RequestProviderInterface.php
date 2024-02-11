@@ -7,7 +7,7 @@ namespace Yiisoft\Input\Http\Request;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
- * RequestProviderInterface provides a way to set the current request and then get it in attribute handlers.
+ * `RequestProviderInterface` provides a way to set the current request and then get it in attribute handlers.
  */
 interface RequestProviderInterface
 {
