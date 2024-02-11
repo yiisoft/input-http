@@ -15,11 +15,20 @@ use Yiisoft\Hydrator\TypeCaster\TypeCastContext;
 use Yiisoft\Hydrator\TypeCaster\TypeCasterInterface;
 use Yiisoft\Middleware\Dispatcher\ParametersResolverInterface;
 
+/**
+ * `HydratorAttributeParametersResolver` resolves middleware parameters with hydrator parameter attributes.
+ */
 final class HydratorAttributeParametersResolver implements ParametersResolverInterface
 {
     private TypeCasterInterface $typeCaster;
     private HydratorInterface $hydrator;
 
+    /**
+     * @param ParameterAttributesHandler $handler The hydrator parameter attributes handler.
+     * @param TypeCasterInterface|null $typeCaster The hydrator type caster that is used to prepare value returned by
+     * parameter attributes handler for middleware parameter.
+     * @param HydratorInterface|null $hydrator The hydrator for context passed to type caster.
+     */
     public function __construct(
         private ParameterAttributesHandler $handler,
         ?TypeCasterInterface $typeCaster = null,

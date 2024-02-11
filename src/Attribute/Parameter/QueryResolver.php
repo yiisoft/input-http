@@ -12,8 +12,14 @@ use Yiisoft\Hydrator\Attribute\Parameter\ParameterAttributeInterface;
 use Yiisoft\Hydrator\Result;
 use Yiisoft\Input\Http\Request\RequestProviderInterface;
 
+/**
+ * Resolver for {@see Query} attribute.
+ */
 final class QueryResolver implements ParameterAttributeResolverInterface
 {
+    /**
+     * @param RequestProviderInterface $requestProvider The request provider.
+     */
     public function __construct(
         private RequestProviderInterface $requestProvider
     ) {

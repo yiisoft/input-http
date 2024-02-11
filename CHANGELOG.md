@@ -1,4 +1,4 @@
-# _____ Change Log
+# Yii Input HTTP Change Log
 
 ## 1.0.0 under development
 

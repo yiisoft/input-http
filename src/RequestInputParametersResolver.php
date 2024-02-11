@@ -12,8 +12,15 @@ use Yiisoft\Hydrator\HydratorInterface;
 use Yiisoft\Hydrator\Validator\ValidatedInputInterface;
 use Yiisoft\Middleware\Dispatcher\ParametersResolverInterface;
 
+/**
+ * Resolves request input parameters.
+ */
 final class RequestInputParametersResolver implements ParametersResolverInterface
 {
+    /**
+     * @param HydratorInterface $hydrator The hydrator to use.
+     * @param bool $throwInputValidationException Whether to throw an exception if input validation fails.
+     */
     public function __construct(
         private HydratorInterface $hydrator,
         private bool $throwInputValidationException = false,
@@ -21,11 +28,12 @@ final class RequestInputParametersResolver implements ParametersResolverInterfac
     }
 
     /**
-     * @param ReflectionParameter[] $parameters
+     * @param ReflectionParameter[] $parameters The parameters to resolve.
+     * @param ServerRequestInterface $request The request to get input from.
      *
-     * @throws InputValidationException
+     * @throws InputValidationException If input validation fails.
      *
-     * @return RequestInputInterface[]
+     * @return RequestInputInterface[] The resolved parameters.
      *
      * @psalm-param array<string,ReflectionParameter> $parameters
      * @psalm-return array<string,RequestInputInterface>
@@ -56,7 +64,9 @@ final class RequestInputParametersResolver implements ParametersResolverInterfac
     }
 
     /**
-     * @throws InputValidationException
+     * Validates input.
+     *
+     * @throws InputValidationException If input validation fails.
      */
     private function processValidation(mixed $value): void
     {

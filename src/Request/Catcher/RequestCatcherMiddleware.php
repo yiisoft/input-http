@@ -10,8 +10,15 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Yiisoft\Input\Http\Request\RequestProviderInterface;
 
+/**
+ * Stores request into {@see RequestProviderInterface}.
+ * You need to add this into your application middleware stack.
+ */
 final class RequestCatcherMiddleware implements MiddlewareInterface
 {
+    /**
+     * @param RequestProviderInterface $provider The request provider.
+     */
     public function __construct(
         private RequestProviderInterface $provider,
     ) {

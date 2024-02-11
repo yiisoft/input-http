@@ -15,7 +15,11 @@
 [![type-coverage](https://shepherd.dev/github/yiisoft/input-http/coverage.svg)](https://shepherd.dev/github/yiisoft/input-http)
 [![psalm-level](https://shepherd.dev/github/yiisoft/input-http/level.svg)](https://shepherd.dev/github/yiisoft/input-http)
 
-The package ...
+The package provides [Yii Hydrator](https://github.com/yiisoft/hydrator) attributes
+to get data from [PSR-7 HTTP request](https://www.php-fig.org/psr/psr-7/) and adds extra abilities to middlewares
+processed by [Yii Middleware Dispatcher](https://github.com/yiisoft/middleware-dispatcher):
+- maps data from PSR-7 HTTP request to PHP DTO representing user input;
+- usage Yii Hydrator parameter attributes for resolve middleware parameters.
 
 ## Requirements
 
@@ -31,46 +35,108 @@ composer require yiisoft/input-http
 
 ## General usage
 
-## Testing
+First of all, you need to store a request object into request provider. There are three ways to do it:
 
-### Unit testing
+1) Add `\Yiisoft\Input\Http\Request\Catcher\RequestCatcherMiddleware` to your application middleware stack.
 
-The package is tested with [PHPUnit](https://phpunit.de/). To run tests:
+2) Add `\Yiisoft\Input\Http\Request\Catcher\RequestCatcherParametersResolver` to your middleware parameters resolver
+in `Yiisoft\Middleware\Dispatcher\MiddlewareFactory`. It is usually used as additional parameters resolver in composite
+parameters resolver. Example parameters resolver configuration for Yii DI container:
 
-```shell
-./vendor/bin/phpunit
+    ```php
+    use Yiisoft\Definitions\Reference;
+    use Yiisoft\Input\Http\Request\Catcher\RequestCatcherParametersResolver;
+    use Yiisoft\Middleware\Dispatcher\CompositeParametersResolver;
+    use Yiisoft\Middleware\Dispatcher\ParametersResolverInterface;
+    
+    ParametersResolverInterface::class => [
+        'class' => CompositeParametersResolver::class,
+        '__construct()' => [
+       gt     Reference::to(RequestCatcherParametersResolver::class),
+            // ...
+        ],
+    ],
+    ```
+
+3) Manually:
+
+    ```php
+    /** 
+     * @var \Yiisoft\Input\Http\Request\RequestProviderInterface $requestProvider
+     * @var \Psr\Http\Message\ServerRequestInterface $request
+     */
+    $requestProvider->set($request);
+    ```
+
+To use the package, you need to create a DTO class and mark its properties with attributes:
+
+```php
+use \Yiisoft\Input\Http\Attribute\Parameter\Query;
+use \Yiisoft\Input\Http\Attribute\Parameter\Body;
+use \Yiisoft\Input\Http\Attribute\Parameter\UploadedFiles;
+
+final class EditPostInput
+{
+    public function __construct(
+        #[Query]
+        private string $id,
+        #[Body]        
+        private string $title,
+        #[Body]        
+        private string $content,
+        #[UploadedFiles('uploads')]        
+        private $uploads,
+    )
+    {
+    
+    }
+
+    // getters
+        
+} 
 ```
 
-### Mutation testing
+Post id will be mapped from query parameter `id`, title and content will be mapped from request body and uploads will
+be mapped from request uploaded files.
 
-The package tests are checked with [Infection](https://infection.github.io/) mutation framework with
-[Infection Static Analysis Plugin](https://github.com/Roave/infection-static-analysis-plugin). To run it:
+Additionally, you can fill a property from request attribute using `#[Request('attributeName')]`.
+This is useful when middleware prior writes the value.
 
-```shell
-./vendor/bin/roave-infection-static-analysis-plugin
+Instead of mapping each property, you can use the following:
+
+```php
+use \Yiisoft\Input\Http\Attribute\Data\FromQuery;
+use \Yiisoft\Input\Http\Attribute\Data\FromBody; 
+
+#[FromQuery]
+final class SearchInput
+{
+    public function __construct(
+        private string $query,
+        private string $category,
+    ) {}
+    
+    // getters
+}
+
+#[FromBody]
+final class CreateUserInput
+{
+    public function __construct(
+        private string $username,
+        private string $email,
+    ) {}
+    
+    // getters
+}
 ```
 
-### Static analysis
+`SearchInput` will be mapped from query parameters, `CreateUserInput` will be mapped from parsed request body.
+Both will expect request parameters in request named same as DTO properties.
 
-The code is statically analyzed with [Psalm](https://psalm.dev/). To run static analysis:
+## Documentation
 
-```shell
-./vendor/bin/psalm
-```
-
-### Code style
-
-Use [Rector](https://github.com/rectorphp/rector) to make codebase follow some specific rules or 
-use either newest or any specific version of PHP: 
-
-```shell
-./vendor/bin/rector
-```
-
-### Dependencies
-
-Use [ComposerRequireChecker](https://github.com/maglnet/ComposerRequireChecker) to detect transitive 
-[Composer](https://getcomposer.org/) dependencies.
+- [Internals](docs/internals.md)
 
 ## License
 
