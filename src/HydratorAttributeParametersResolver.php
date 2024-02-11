@@ -25,7 +25,7 @@ final class HydratorAttributeParametersResolver implements ParametersResolverInt
 
     /**
      * @param ParameterAttributesHandler $handler The hydrator parameter attributes handler.
-     * @param TypeCasterInterface|null $typeCaster The hydrator type caster, that used for prepare value returned
+     * @param TypeCasterInterface|null $typeCaster The hydrator type caster that is used to prepare value returned by
      * parameter attributes handler for middleware parameter.
      * @param HydratorInterface|null $hydrator The hydrator for context passed to type caster.
      */

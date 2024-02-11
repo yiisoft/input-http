@@ -15,8 +15,9 @@
 [![type-coverage](https://shepherd.dev/github/yiisoft/input-http/coverage.svg)](https://shepherd.dev/github/yiisoft/input-http)
 [![psalm-level](https://shepherd.dev/github/yiisoft/input-http/level.svg)](https://shepherd.dev/github/yiisoft/input-http)
 
-The package provide [Yii Hydrator](https://github.com/yiisoft/hydrator) attributes for get data from [PSR-7 HTTP request](https://www.php-fig.org/psr/psr-7/) and extra abilities to middlewares processed by
-[Yii Middleware Dispatcher](https://github.com/yiisoft/middleware-dispatcher):
+The package provides [Yii Hydrator](https://github.com/yiisoft/hydrator) attributes
+to get data from [PSR-7 HTTP request](https://www.php-fig.org/psr/psr-7/) and adds extra abilities to middlewares
+processed by [Yii Middleware Dispatcher](https://github.com/yiisoft/middleware-dispatcher):
 - maps data from PSR-7 HTTP request to PHP DTO representing user input;
 - usage Yii Hydrator parameter attributes for resolve middleware parameters.
 
@@ -34,38 +35,38 @@ composer require yiisoft/input-http
 
 ## General usage
 
-First of all, need to store request object to request provider. There are three ways to do it:
+First of all, you need to store a request object into request provider. There are three ways to do it:
 
 1) Add `\Yiisoft\Input\Http\Request\Catcher\RequestCatcherMiddleware` to your application middleware stack.
 
-2) Add `\Yiisoft\Input\Http\Request\Catcher\RequestCatcherParametersResolver` into your middleware parameters resolver
-in `Yiisoft\Middleware\Dispatcher\MiddlewareFactory`. Usually used as additional parameters resolver in composite
+2) Add `\Yiisoft\Input\Http\Request\Catcher\RequestCatcherParametersResolver` to your middleware parameters resolver
+in `Yiisoft\Middleware\Dispatcher\MiddlewareFactory`. It is usually used as additional parameters resolver in composite
 parameters resolver. Example parameters resolver configuration for Yii DI container:
 
-```php
-use Yiisoft\Definitions\Reference;
-use Yiisoft\Input\Http\Request\Catcher\RequestCatcherParametersResolver;
-use Yiisoft\Middleware\Dispatcher\CompositeParametersResolver;
-use Yiisoft\Middleware\Dispatcher\ParametersResolverInterface;
-
-ParametersResolverInterface::class => [
-    'class' => CompositeParametersResolver::class,
-    '__construct()' => [
-        Reference::to(RequestCatcherParametersResolver::class),
-        // ...
+    ```php
+    use Yiisoft\Definitions\Reference;
+    use Yiisoft\Input\Http\Request\Catcher\RequestCatcherParametersResolver;
+    use Yiisoft\Middleware\Dispatcher\CompositeParametersResolver;
+    use Yiisoft\Middleware\Dispatcher\ParametersResolverInterface;
+    
+    ParametersResolverInterface::class => [
+        'class' => CompositeParametersResolver::class,
+        '__construct()' => [
+            Reference::to(RequestCatcherParametersResolver::class),
+            // ...
+        ],
     ],
-],
-```
+    ```
 
 3) Manually:
 
-```php
-/** 
- * @var \Yiisoft\Input\Http\Request\RequestProviderInterface $requestProvider
- * @var \Psr\Http\Message\ServerRequestInterface $request
- */
-$requestProvider->set($request);
-```
+    ```php
+    /** 
+     * @var \Yiisoft\Input\Http\Request\RequestProviderInterface $requestProvider
+     * @var \Psr\Http\Message\ServerRequestInterface $request
+     */
+    $requestProvider->set($request);
+    ```
 
 To use the package, you need to create a DTO class and mark its properties with attributes:
 

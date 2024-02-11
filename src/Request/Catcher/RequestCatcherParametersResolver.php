@@ -12,8 +12,8 @@ use Yiisoft\Middleware\Dispatcher\ParametersResolverInterface;
 
 /**
  * Stores request into {@see RequestProviderInterface}.
- * You need to add this into your middleware parameters resolver in {@see MiddlewareFactory}. Usually used as additional
- * parameters resolver in {@see CompositeParametersResolver}.
+ * You need to add this into your middleware parameters resolver in {@see MiddlewareFactory}.
+ * It is usually used as additional parameters resolver in {@see CompositeParametersResolver}.
  */
 final class RequestCatcherParametersResolver implements ParametersResolverInterface
 {
