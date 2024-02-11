@@ -8,7 +8,7 @@ use RuntimeException;
 use Yiisoft\Validator\Result;
 
 /**
- * `InputValidationException` is thrown when input validation fails and contains validation result.
+ * `InputValidationException` is thrown when input validation fails and contains a validation result.
  */
 final class InputValidationException extends RuntimeException
 {

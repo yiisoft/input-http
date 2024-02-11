@@ -52,7 +52,7 @@ parameters resolver. Example parameters resolver configuration for Yii DI contai
     ParametersResolverInterface::class => [
         'class' => CompositeParametersResolver::class,
         '__construct()' => [
-            Reference::to(RequestCatcherParametersResolver::class),
+       gt     Reference::to(RequestCatcherParametersResolver::class),
             // ...
         ],
     ],
