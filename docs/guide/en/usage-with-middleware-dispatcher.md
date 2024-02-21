@@ -1,9 +1,15 @@
-# Usage with middleware
+# Usage with middleware dispatcher
 
-`HydratorAttributeParametersResolver` is a 
-[custom implementation of parameters resolver](https://github.com/yiisoft/middleware-dispatcher?tab=readme-ov-file#creating-your-own-implementation-of-parameters-resolver) 
-from [Yii Middleware Dispatcher](https://github.com/yiisoft/middleware-dispatcher) package. It allows to use hydrator 
-attributes in middleware executed by middleware dispatcher.
+This package offers multiple 
+[custom implementations of parameters' resolver](https://github.com/yiisoft/middleware-dispatcher?tab=readme-ov-file#creating-your-own-implementation-of-parameters-resolver) 
+from [Yii Middleware Dispatcher](https://github.com/yiisoft/middleware-dispatcher) package:
+
+- [`HydratorAttributeParametersResolver`](#hydratorattributeparametersresolver)
+- `RequestInputParametersResolver`
+
+## `HydratorAttributeParametersResolver`
+
+Allows to use hydrator attributes in middleware executed by middleware dispatcher.
 
 The practical use case is mapping query parameters to controller action's arguments:
 
@@ -11,7 +17,7 @@ The practical use case is mapping query parameters to controller action's argume
 use Psr\Http\Message\ResponseInterface;
 use Yiisoft\Input\Http\Attribute\Parameter\Query;
 
-final class PostsController
+final class PostController
 {
     public function update(#[Query('id')] string $id): ResponseInterface
     {
@@ -32,7 +38,7 @@ You can change argument's type hint for automatic type casting:
 use Psr\Http\Message\ResponseInterface;
 use Yiisoft\Input\Http\Attribute\Parameter\Query;
 
-final class PostsController
+final class PostController
 {
     public function update(#[Query('id')] int $id): ResponseInterface
     {
@@ -107,3 +113,12 @@ $dispatcher = new MiddlewareDispatcher(
     $eventDispatcher,
 );
 ```
+
+## `RequestInputParametersResolver`
+
+Allows to use input classes as type hints in middleware executed by middleware dispatcher.
+
+The practical use case is mapping input classes to controller action's arguments:
+
+
+
