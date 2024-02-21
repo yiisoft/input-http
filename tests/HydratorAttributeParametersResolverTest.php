@@ -39,7 +39,7 @@ final class HydratorAttributeParametersResolverTest extends TestCase
                 int $a,
                 #[Query('b')]
                 int $b,
-                #[Query('non-exist')]
+                #[Query('non-existing')]
                 int $c,
             ) => null,
         );
