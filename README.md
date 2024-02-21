@@ -19,7 +19,7 @@ The package provides [Yii Hydrator](https://github.com/yiisoft/hydrator) attribu
 to get data from [PSR-7 HTTP request](https://www.php-fig.org/psr/psr-7/) and adds extra abilities to middlewares
 processed by [Yii Middleware Dispatcher](https://github.com/yiisoft/middleware-dispatcher):
 - maps data from PSR-7 HTTP request to PHP DTO representing user input;
-- usage Yii Hydrator parameter attributes for resolve middleware parameters.
+- uses Yii Hydrator parameter attributes for resolving middleware parameters.
 
 ## Requirements
 
@@ -52,7 +52,7 @@ parameters resolver. Example parameters resolver configuration for Yii DI contai
     ParametersResolverInterface::class => [
         'class' => CompositeParametersResolver::class,
         '__construct()' => [
-       gt     Reference::to(RequestCatcherParametersResolver::class),
+            Reference::to(RequestCatcherParametersResolver::class),
             // ...
         ],
     ],
@@ -136,6 +136,7 @@ Both will expect request parameters in request named same as DTO properties.
 
 ## Documentation
 
+- [Guide](docs/guide/en/README.md)
 - [Internals](docs/internals.md)
 
 ## License
