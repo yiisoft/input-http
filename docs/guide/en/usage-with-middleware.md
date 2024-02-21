@@ -1,7 +1,7 @@
 # Usage with middleware
 
 `HydratorAttributeParametersResolver` is a 
-[custom implementation pf parameters resolver](https://github.com/yiisoft/middleware-dispatcher?tab=readme-ov-file#creating-your-own-implementation-of-parameters-resolver) 
+[custom implementation of parameters resolver](https://github.com/yiisoft/middleware-dispatcher?tab=readme-ov-file#creating-your-own-implementation-of-parameters-resolver) 
 from [Yii Middleware Dispatcher](https://github.com/yiisoft/middleware-dispatcher) package. It allows to use hydrator 
 attributes in middleware executed by middleware dispatcher.
 
