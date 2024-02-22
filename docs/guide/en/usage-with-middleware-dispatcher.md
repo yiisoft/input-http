@@ -19,7 +19,7 @@ use Yiisoft\Input\Http\Attribute\Parameter\Query;
 
 final class PostController
 {
-    public function update(#[Query('id')] string $id): ResponseInterface
+    public function get(#[Query('id')] string $id): ResponseInterface
     {
         // ...
         
@@ -40,7 +40,7 @@ use Yiisoft\Input\Http\Attribute\Parameter\Query;
 
 final class PostController
 {
-    public function update(#[Query('id')] int $id): ResponseInterface
+    public function get(#[Query('id')] int $id): ResponseInterface
     {
         // ...
         
