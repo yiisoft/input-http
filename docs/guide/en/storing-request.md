@@ -1,4 +1,4 @@
-# Request catcher
+# Storing request
 
 In order for this package to be able to parse request's data, you need to store a request object into request provider. 
 There are 3 ways to do it:

@@ -54,7 +54,7 @@ when attaching the attribute:
 use Yiisoft\Input\Http\Attribute\Parameter\Body;
 use Yiisoft\Input\Http\Attribute\Parameter\Query;
 use Yiisoft\Input\Http\Attribute\Parameter\Request;
-use \Yiisoft\Input\Http\Attribute\Parameter\UploadedFiles;
+use Yiisoft\Input\Http\Attribute\Parameter\UploadedFiles;
 
 final class UpdatePostInput
 {

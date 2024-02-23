@@ -16,7 +16,7 @@ final class UpdatePostInput implements RequestInputInterface
 }
 ```
 
-It can be filled automatically from request's parameters using attributes:
+It can be prepared to be filled automatically from request's parameters using attributes:
 
 ```php
 use Yiisoft\Input\Http\AbstractInput;
@@ -36,8 +36,8 @@ final class UpdatePostInput implements RequestInputInterface
 
 For more available options, see [Hydrator attributes](hydrator-attributes.md) section.
 
-To ease automatic filling, include according 
-[resolver](usage-with-middleware-dispatcher.md#requestinputparametersresolver) to middleware dispatcher.
+The main concept of request input is to ease automatic filling with according 
+[resolver](parameters-resolvers.md#requestinputparametersresolver). It's possible to use hydrator directly too though.
 
 ## Combining with validation
 
