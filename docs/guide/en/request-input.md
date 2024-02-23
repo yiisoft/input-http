@@ -10,13 +10,13 @@ use Yiisoft\Validator\Rule\Required;
 final class UpdatePostInput implements RequestInputInterface 
 {
     public int $id;
-    public string $name;
+    public string $title;
     public string $description = '';
     public string $content;
 }
 ```
 
-It can be filled automatically from request's query / body parameters using attributes:
+It can be filled automatically from request's parameters using attributes:
 
 ```php
 use Yiisoft\Input\Http\AbstractInput;
@@ -24,18 +24,22 @@ use Yiisoft\Input\Http\Attribute\Data\FromBody;
 use Yiisoft\Input\Http\RequestInputInterface;
 use Yiisoft\Validator\Rule\Required;
 
-#[FromBody] // Use #[FromQuery] for filling from query parameters.
+#[FromBody]
 final class UpdatePostInput implements RequestInputInterface 
 {
     public int $id;
-    public string $name;
+    public string $title;
     public string $description = '';
     public string $content;
 }
 ```
 
-To enable automatic filling, include according 
+For more available options, see [Hydrator attributes](hydrator-attributes.md) section.
+
+To ease automatic filling, include according 
 [resolver](usage-with-middleware-dispatcher.md#requestinputparametersresolver) to middleware dispatcher.
+
+## Combining with validation
 
 If you need validation features additionally, just extend the DTO from `AbstractInput` class which also implements 
 `ValidatedInputInterface`. This way you can use validation attributes for properties:
@@ -58,7 +62,7 @@ final class UpdatePostInput extends AbstractInput
         #[Required]
         #[StringValue]
         #[Length(max: 100)]
-        public string $name;
+        public string $title;
         #[Length(max: 255)]
         #[StringValue]
         public string $description = '';
