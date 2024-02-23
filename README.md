@@ -35,11 +35,50 @@ composer require yiisoft/input-http
 
 ## General usage
 
-To use the package, you need to create a DTO class and mark its properties with attributes.
+Yii Input HTTP allows to have DTO with attributes like this:
+
+```php
+use Yiisoft\Input\Http\AbstractInput;
+use Yiisoft\Input\Http\Attribute\Data\FromBody;
+
+#[FromBody]
+final class UpdatePostInput extends AbstractInput
+{
+    public int $id;
+    public string $title;
+    public string $description = '';
+    public string $content;
+}
+```
+
+and automatically resolve and hydrate it, for example, for arguments like that:
+
+```php
+final class UpdatePostController
+{
+    public function update(UpdatePostInput $post): ResponseInterface
+    {
+        // ...
+        
+        /** @var ResponseInterface $response */
+        return $response;
+    }
+}
+```
+
+Basic steps:
+
+- Configure [storing request](docs/guide/en/storing-request.md).
+- Configure [parameters resolver](docs/guide/en/parameters-resolvers.md).
+- Create DTO ([request input](docs/guide/en/request-input.md)).
+- Mark DTO properties with [hydrator attributes](docs/guide/en/hydrator-attributes.md) provided by this package.
+- Add DTO class name as type hint to a class method argument where you want to it to be resolved.
+
+For other available options, see the [guide](docs/en/guide)
 
 ## Documentation
 
-- [Guide](docs/guide/en/README.md)
+- [Guide](docs/guide/en)
 - [Internals](docs/internals.md)
 
 ## License
