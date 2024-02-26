@@ -74,7 +74,7 @@ Basic steps:
 - Mark DTO properties with [hydrator attributes](docs/guide/en/hydrator-attributes.md) provided by this package.
 - Add DTO class name as type hint to a class method argument where you want to it to be resolved.
 
-For other available options, see the [guide](docs/en/guide)
+For other available options, see the [guide](docs/guide/en).
 
 ## Documentation
 
