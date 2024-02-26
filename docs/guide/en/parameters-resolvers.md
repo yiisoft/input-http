@@ -151,7 +151,10 @@ final class UpdatePostController
 }
 ```
 
-The used DTO is [request input](request-input.md) with [hydrator attribute](hydrator-attributes.md) applied. 
+The used DTO is [request input](request-input.md) with [hydrator attribute](hydrator-attributes.md) applied.
+
+> As an alternative, [Yii Validating Hydrator](https://github.com/yiisoft/hydrator-validator) can be used instead for 
+> automatic validation of request input DTO.
 
 ### Adding to middleware dispatcher
 
