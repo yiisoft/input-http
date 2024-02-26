@@ -126,6 +126,7 @@ Allows to use [request input](request-input.md) classes as type hints in middlew
 The practical use case is mapping request input classes to controller action's arguments:
 
 ```php
+use Psr\Http\Message\ResponseInterface;
 use Yiisoft\Input\Http\AbstractInput;
 use Yiisoft\Input\Http\Attribute\Data\FromBody;
 
