@@ -19,7 +19,7 @@ The package provides [Yii Hydrator](https://github.com/yiisoft/hydrator) attribu
 to get data from [PSR-7 HTTP request](https://www.php-fig.org/psr/psr-7/) and adds extra abilities to middlewares
 processed by [Yii Middleware Dispatcher](https://github.com/yiisoft/middleware-dispatcher):
 - maps data from PSR-7 HTTP request to PHP DTO representing user input;
-- usage Yii Hydrator parameter attributes for resolve middleware parameters.
+- uses Yii Hydrator parameter attributes for resolving middleware parameters.
 
 ## Requirements
 
@@ -35,107 +35,50 @@ composer require yiisoft/input-http
 
 ## General usage
 
-First of all, you need to store a request object into request provider. There are three ways to do it:
-
-1) Add `\Yiisoft\Input\Http\Request\Catcher\RequestCatcherMiddleware` to your application middleware stack.
-
-2) Add `\Yiisoft\Input\Http\Request\Catcher\RequestCatcherParametersResolver` to your middleware parameters resolver
-in `Yiisoft\Middleware\Dispatcher\MiddlewareFactory`. It is usually used as additional parameters resolver in composite
-parameters resolver. Example parameters resolver configuration for Yii DI container:
-
-    ```php
-    use Yiisoft\Definitions\Reference;
-    use Yiisoft\Input\Http\Request\Catcher\RequestCatcherParametersResolver;
-    use Yiisoft\Middleware\Dispatcher\CompositeParametersResolver;
-    use Yiisoft\Middleware\Dispatcher\ParametersResolverInterface;
-    
-    ParametersResolverInterface::class => [
-        'class' => CompositeParametersResolver::class,
-        '__construct()' => [
-       gt     Reference::to(RequestCatcherParametersResolver::class),
-            // ...
-        ],
-    ],
-    ```
-
-3) Manually:
-
-    ```php
-    /** 
-     * @var \Yiisoft\Input\Http\Request\RequestProviderInterface $requestProvider
-     * @var \Psr\Http\Message\ServerRequestInterface $request
-     */
-    $requestProvider->set($request);
-    ```
-
-To use the package, you need to create a DTO class and mark its properties with attributes:
+Yii Input HTTP allows to have DTO with attributes like this:
 
 ```php
-use \Yiisoft\Input\Http\Attribute\Parameter\Query;
-use \Yiisoft\Input\Http\Attribute\Parameter\Body;
-use \Yiisoft\Input\Http\Attribute\Parameter\UploadedFiles;
-
-final class EditPostInput
-{
-    public function __construct(
-        #[Query]
-        private string $id,
-        #[Body]        
-        private string $title,
-        #[Body]        
-        private string $content,
-        #[UploadedFiles('uploads')]        
-        private $uploads,
-    )
-    {
-    
-    }
-
-    // getters
-        
-} 
-```
-
-Post id will be mapped from query parameter `id`, title and content will be mapped from request body and uploads will
-be mapped from request uploaded files.
-
-Additionally, you can fill a property from request attribute using `#[Request('attributeName')]`.
-This is useful when middleware prior writes the value.
-
-Instead of mapping each property, you can use the following:
-
-```php
-use \Yiisoft\Input\Http\Attribute\Data\FromQuery;
-use \Yiisoft\Input\Http\Attribute\Data\FromBody; 
-
-#[FromQuery]
-final class SearchInput
-{
-    public function __construct(
-        private string $query,
-        private string $category,
-    ) {}
-    
-    // getters
-}
+use Yiisoft\Input\Http\AbstractInput;
+use Yiisoft\Input\Http\Attribute\Data\FromBody;
 
 #[FromBody]
-final class CreateUserInput
+final class UpdatePostInput extends AbstractInput
 {
-    public function __construct(
-        private string $username,
-        private string $email,
-    ) {}
-    
-    // getters
+    public int $id;
+    public string $title;
+    public string $description = '';
+    public string $content;
 }
 ```
 
-`SearchInput` will be mapped from query parameters, `CreateUserInput` will be mapped from parsed request body.
-Both will expect request parameters in request named same as DTO properties.
+and automatically resolve and hydrate it, for example, for arguments like that:
+
+```php
+final class UpdatePostController
+{
+    public function update(UpdatePostInput $post): ResponseInterface
+    {
+        // ...
+        
+        /** @var ResponseInterface $response */
+        return $response;
+    }
+}
+```
+
+Basic steps:
+
+- Configure [storing request](docs/guide/en/storing-request.md).
+- Configure [parameters resolver](docs/guide/en/parameters-resolvers.md).
+- Create DTO ([request input](docs/guide/en/request-input.md)).
+- Mark DTO properties with [hydrator attributes](docs/guide/en/hydrator-attributes.md) provided by this package.
+- Add DTO class name as type hint to a class method argument where you want to it to be resolved.
+
+For other available options, see the [guide](docs/guide/en).
 
 ## Documentation
 
+- [Guide](docs/guide/en)
 - [Internals](docs/internals.md)
 
 ## License
