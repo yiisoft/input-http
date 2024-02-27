@@ -19,8 +19,8 @@ use Yiisoft\Hydrator\Validator\Attribute\ValidateResolver;
 use Yiisoft\Hydrator\Validator\ValidatingHydrator;
 use Yiisoft\Injector\Injector;
 use Yiisoft\Input\Http\Attribute\Data\FromQueryResolver;
-use Yiisoft\Input\Http\Request\RequestProvider;
 use Yiisoft\Input\Http\RequestInputParametersResolver;
+use Yiisoft\RequestProvider\RequestProvider;
 use Yiisoft\Test\Support\Container\SimpleContainer;
 use Yiisoft\Validator\Validator;
 

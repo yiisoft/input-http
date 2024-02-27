@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 use Yiisoft\Definitions\Reference;
 use Yiisoft\Hydrator\Validator\ValidatingHydrator;
-use Yiisoft\Input\Http\Request\RequestProvider;
-use Yiisoft\Input\Http\Request\RequestProviderInterface;
 use Yiisoft\Input\Http\RequestInputParametersResolver;
+use Yiisoft\RequestProvider\RequestProvider;
+use Yiisoft\RequestProvider\RequestProviderInterface;
 
 /** @var array $params */
 

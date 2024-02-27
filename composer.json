@@ -31,6 +31,7 @@
             "url": "https://github.com/sponsors/yiisoft"
         }
     ],
+    "minimum-stability": "dev",
     "require": {
         "php": "^8.0",
         "psr/container": "^1.0|^2.0",
@@ -41,7 +42,8 @@
         "yiisoft/hydrator": "^1.0",
         "yiisoft/hydrator-validator": "^1.0",
         "yiisoft/middleware-dispatcher": "^5.1",
-        "yiisoft/validator": "^1.1"
+        "yiisoft/validator": "^1.1",
+        "yiisoft/request-provider": "dev-initial"
     },
     "require-dev": {
         "maglnet/composer-require-checker": "^4.4",
@@ -53,6 +55,12 @@
         "yiisoft/di": "^1.2",
         "yiisoft/test-support": "^3.0"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/yiisoft/request-provider"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "Yiisoft\\Input\\Http\\": "src"

@@ -10,7 +10,8 @@ use Yiisoft\Hydrator\Attribute\Data\DataAttributeInterface;
 use Yiisoft\Hydrator\Attribute\Data\DataAttributeResolverInterface;
 use Yiisoft\Hydrator\AttributeHandling\Exception\UnexpectedAttributeException;
 use Yiisoft\Hydrator\DataInterface;
-use Yiisoft\Input\Http\Request\RequestProviderInterface;
+
+use Yiisoft\RequestProvider\RequestProviderInterface;
 
 use function is_array;
 

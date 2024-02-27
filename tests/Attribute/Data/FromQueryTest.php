@@ -12,11 +12,11 @@ use Yiisoft\Hydrator\Hydrator;
 use Yiisoft\Input\Http\Attribute\Data\FromBody;
 use Yiisoft\Input\Http\Attribute\Data\FromQuery;
 use Yiisoft\Input\Http\Attribute\Data\FromQueryResolver;
-use Yiisoft\Input\Http\Request\RequestProvider;
-use Yiisoft\Input\Http\Request\RequestProviderInterface;
 use Yiisoft\Input\Http\Tests\Support\Input\FromQueryInput;
 use Yiisoft\Input\Http\Tests\Support\Input\FromQueryNestedInput;
 use Yiisoft\Input\Http\Tests\Support\TestHelper;
+use Yiisoft\RequestProvider\RequestProvider;
+use Yiisoft\RequestProvider\RequestProviderInterface;
 
 final class FromQueryTest extends TestCase
 {

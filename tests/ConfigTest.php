@@ -11,10 +11,10 @@ use Yiisoft\Di\ContainerConfig;
 use Yiisoft\Di\StateResetter;
 use Yiisoft\Hydrator\Hydrator;
 use Yiisoft\Hydrator\HydratorInterface;
-use Yiisoft\Input\Http\Request\RequestNotSetException;
-use Yiisoft\Input\Http\Request\RequestProvider;
-use Yiisoft\Input\Http\Request\RequestProviderInterface;
 use Yiisoft\Input\Http\RequestInputParametersResolver;
+use Yiisoft\RequestProvider\RequestNotSetException;
+use Yiisoft\RequestProvider\RequestProvider;
+use Yiisoft\RequestProvider\RequestProviderInterface;
 use Yiisoft\Validator\Validator;
 use Yiisoft\Validator\ValidatorInterface;
 
