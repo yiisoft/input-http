@@ -1,7 +1,8 @@
 # Storing request
 
-In order for this package to be able to parse request's data, you need to store a request object into request provider. 
-There are 3 ways to do it:
+In order for this package to be able to parse request's data,
+you need to store a request object into the request provider. 
+There are three ways to do it:
 
 1) Add `Yiisoft\Input\Http\Request\Catcher\RequestCatcherMiddleware` to your application middleware stack.
 
