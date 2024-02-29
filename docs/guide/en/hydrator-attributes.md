@@ -116,9 +116,9 @@ final class CreateUserInput
 
 ### Customization
 
-Similar to parameter attributes, the names of request's parameters can be customized. Here it's done via a map where keys
-are DTO properties' names and values according to request's parameter names, which are expected. Besides that, you can 
-narrow down the scope where exactly to parse the request parameters from. Also, it's possible to throw the exception
+Similar to parameter attributes, the names of request's parameters can be customized. Here it's done via a map where 
+keys are DTO properties' names and values according to request's parameter names, which are expected. Besides that, you 
+can narrow down the scope where exactly to parse the request parameters from. Also, it's possible to throw the exception
 when there are some parameters present in the selected request's scope that were not specified in the map.
 
 ```php
