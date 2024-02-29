@@ -4,7 +4,7 @@ This package provides some additional attributes for [hydrator](https://github.c
 
 ## Parameter attributes
 
-These attributes are intended to use for a single DTO parameter: 
+These attributes are used for a single DTO parameter: 
 
 - `#[Query]` - maps with request's query parameter.
 - `#[Body]` - maps with request's body parameter.
@@ -47,7 +47,7 @@ Here:
 
 ### Customization
 
-By default, request's parameters are expected to have the same name as DTO properties. To change that, pass the name
+By default, request parameters are expected to have the same name as DTO properties. To change that, pass the name
 when attaching the attribute:
 
 ```php
@@ -76,7 +76,7 @@ final class UpdatePostInput
 
 ## Data attributes
 
-They are more neat when the source of values is common:
+They are neater when the source of values is common:
 
 - `#[FromQuery]` - maps with request's query parameters.
 - `#[FromBody]` - maps with request's body parameters.
@@ -116,17 +116,17 @@ final class CreateUserInput
 
 ### Customization
 
-Similar to parameter attributes, the names of request's parameters can be customized. Here it's done via map where keys
-are DTO properties' names and values - according request's parameter names which are expected. Besides that, you can 
-narrow down the scope where exactly to parse the request parameters from. Also, it's possible to throw the exception
-when there are some parameters present in selected request's scope that were not specified in the map.
+Similar to parameter attributes, the names of request's parameters can be customized. Here it's done via a map where 
+keys are DTO properties' names and values according to request's parameter names, which are expected. Besides that, you 
+can narrow down the scope where exactly to parse the request parameters from. Also, it's possible to throw the exception
+when there are some parameters present in the selected request's scope that were not specified in the map.
 
 ```php
 use Yiisoft\Input\Http\Attribute\Data\FromBody;
 use Yiisoft\Input\Http\Attribute\Data\FromQuery; 
 
 #[FromQuery(
-    'search', // Use array for bigger level of nesting, for example: `['client', 'search']`. 
+    'search', // Use an array for bigger level of nesting, for example, `['client', 'search']`. 
     ['query' => 'q', 'category' => 'c'], 
     strict: true,
 )]

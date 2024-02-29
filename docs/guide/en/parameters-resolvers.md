@@ -9,7 +9,7 @@ from [Yii Middleware Dispatcher](https://github.com/yiisoft/middleware-dispatche
 
 ## `HydratorAttributeParametersResolver`
 
-Allows to use hydrator attributes in middleware executed by middleware dispatcher.
+Allows using hydrator attributes in middleware executed by middleware dispatcher.
 
 The practical use case is mapping query parameters to controller action's arguments:
 
@@ -168,7 +168,7 @@ use Yiisoft\Input\Http\RequestInputParametersResolver;
 /** @var HydratorInterface $hydrator */
 $resolver = new RequestInputParametersResolver(
     $hydrator, 
-    // This allows to throw the exception when the validation result is not valid.
+    // This allows throwing the exception when the validation result is not valid.
     throwInputValidationException: true,
 );
 ```

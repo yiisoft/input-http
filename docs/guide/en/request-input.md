@@ -37,11 +37,12 @@ final class UpdatePostInput implements RequestInputInterface
 For more available options, see [Hydrator attributes](hydrator-attributes.md) section.
 
 The main concept of request input is to ease automatic filling with according 
-[resolver](parameters-resolvers.md#requestinputparametersresolver). It's possible to use hydrator directly too though.
+[resolver](parameters-resolvers.md#requestinputparametersresolver).
+It's possible to use hydrator directly too, though.
 
 ## Combining with validation
 
-If you need validation features additionally, just extend the DTO from `AbstractInput` class which also implements 
+If you need validation features additionally, extend the DTO from `AbstractInput` class which also implements 
 `ValidatedInputInterface`. This way you can use validation attributes for properties:
 
 ```php
