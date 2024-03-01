@@ -60,6 +60,7 @@ final class ConfigTest extends TestCase
         }
 
         return array_merge(
+            require dirname(__DIR__) . '/vendor/yiisoft/request-provider/config/di-web.php',
             require dirname(__DIR__) . '/config/di-web.php',
             [
                 HydratorInterface::class => Hydrator::class,
