@@ -173,4 +173,17 @@ final class RequestInputParametersResolverTest extends TestCase
         $this->expectException(InputValidationException::class);
         $resolver->resolve($parameters, $request);
     }
+
+    public function testUnionType(): void
+    {
+        $request = $this->createMock(ServerRequestInterface::class);
+        $request->method('getQueryParams')->willReturn([]);
+
+        $resolver = TestHelper::createRequestInputParametersResolver($request);
+        $parameters = TestHelper::getParameters(static fn(PersonInput|string $input) => null);
+
+        $result = $resolver->resolve($parameters, $request);
+
+        $this->assertSame([], $result);
+    }
 }
