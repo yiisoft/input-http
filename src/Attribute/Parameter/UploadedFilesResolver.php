@@ -10,7 +10,7 @@ use Yiisoft\Hydrator\Attribute\Parameter\ParameterAttributeResolverInterface;
 use Yiisoft\Hydrator\AttributeHandling\Exception\UnexpectedAttributeException;
 use Yiisoft\Hydrator\AttributeHandling\ParameterAttributeResolveContext;
 use Yiisoft\Hydrator\Result;
-use Yiisoft\Input\Http\Request\RequestProviderInterface;
+use Yiisoft\RequestProvider\RequestProviderInterface;
 
 /**
  * Resolver for {@see UploadedFiles} attribute.
@@ -21,7 +21,7 @@ final class UploadedFilesResolver implements ParameterAttributeResolverInterface
      * @param RequestProviderInterface $requestProvider The request provider.
      */
     public function __construct(
-        private RequestProviderInterface $requestProvider
+        private RequestProviderInterface $requestProvider,
     ) {
     }
 

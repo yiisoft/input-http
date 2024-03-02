@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Yiisoft\Input\Http\Tests;
 
 use Closure;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 use Yiisoft\Input\Http\InputValidationException;
@@ -45,7 +46,7 @@ final class RequestInputParametersResolverTest extends TestCase
         $this->assertSame('2', $simple->b);
     }
 
-    public function dataParameters(): array
+    public static function dataParameters(): array
     {
         return [
             [
@@ -63,9 +64,7 @@ final class RequestInputParametersResolverTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider dataParameters
-     */
+    #[DataProvider('dataParameters')]
     public function testParameters(array $expected, Closure $closure): void
     {
         $request = $this->createMock(ServerRequestInterface::class);
@@ -172,5 +171,18 @@ final class RequestInputParametersResolverTest extends TestCase
 
         $this->expectException(InputValidationException::class);
         $resolver->resolve($parameters, $request);
+    }
+
+    public function testUnionType(): void
+    {
+        $request = $this->createMock(ServerRequestInterface::class);
+        $request->method('getQueryParams')->willReturn([]);
+
+        $resolver = TestHelper::createRequestInputParametersResolver($request);
+        $parameters = TestHelper::getParameters(static fn(PersonInput|string $input) => null);
+
+        $result = $resolver->resolve($parameters, $request);
+
+        $this->assertSame([], $result);
     }
 }

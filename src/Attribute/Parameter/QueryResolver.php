@@ -10,7 +10,7 @@ use Yiisoft\Hydrator\AttributeHandling\Exception\UnexpectedAttributeException;
 use Yiisoft\Hydrator\AttributeHandling\ParameterAttributeResolveContext;
 use Yiisoft\Hydrator\Attribute\Parameter\ParameterAttributeInterface;
 use Yiisoft\Hydrator\Result;
-use Yiisoft\Input\Http\Request\RequestProviderInterface;
+use Yiisoft\RequestProvider\RequestProviderInterface;
 
 /**
  * Resolver for {@see Query} attribute.

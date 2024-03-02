@@ -11,9 +11,9 @@ use Yiisoft\Hydrator\Hydrator;
 use Yiisoft\Input\Http\Attribute\Parameter\Body;
 use Yiisoft\Input\Http\Attribute\Parameter\Request;
 use Yiisoft\Input\Http\Attribute\Parameter\RequestResolver;
-use Yiisoft\Input\Http\Request\RequestProvider;
-use Yiisoft\Input\Http\Request\RequestProviderInterface;
 use Yiisoft\Input\Http\Tests\Support\TestHelper;
+use Yiisoft\RequestProvider\RequestProvider;
+use Yiisoft\RequestProvider\RequestProviderInterface;
 
 final class RequestTest extends TestCase
 {
