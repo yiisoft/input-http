@@ -68,7 +68,7 @@ final class UpdatePostController
 
 Basic steps:
 
-- Configure [storing request](docs/guide/en/storing-request.md).
+- Configure [storing request](https://github.com/yiisoft/request-provider?tab=readme-ov-file#general-usage).
 - Configure [parameters resolver](docs/guide/en/parameters-resolvers.md).
 - Create DTO ([request input](docs/guide/en/request-input.md)).
 - Mark DTO properties with [hydrator attributes](docs/guide/en/hydrator-attributes.md) provided by this package.
