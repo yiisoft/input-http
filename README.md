@@ -23,7 +23,7 @@ processed by [Yii Middleware Dispatcher](https://github.com/yiisoft/middleware-d
 
 ## Requirements
 
-- PHP 8.0 or higher.
+- PHP 8.1 or higher.
 
 ## Installation
 
