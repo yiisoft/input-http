@@ -45,12 +45,12 @@
         "yiisoft/request-provider": "^1.0"
     },
     "require-dev": {
-        "maglnet/composer-require-checker": "^4.4",
+        "maglnet/composer-require-checker": "^4.7",
         "phpunit/phpunit": "^10.5",
         "rector/rector": "^1.0.0",
-        "roave/infection-static-analysis-plugin": "^1.16",
+        "roave/infection-static-analysis-plugin": "^1.34",
         "spatie/phpunit-watcher": "^1.23",
-        "vimeo/psalm": "^4.30|^5.7",
+        "vimeo/psalm": "^5.22",
         "yiisoft/di": "^1.2",
         "yiisoft/test-support": "^3.0"
     },
