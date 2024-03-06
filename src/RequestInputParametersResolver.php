@@ -78,7 +78,7 @@ final class RequestInputParametersResolver implements ParametersResolverInterfac
         }
 
         $result = $value->getValidationResult();
-        if ($result !== null && !$result->isValid()) {
+        if (!$result->isValid()) {
             throw new InputValidationException($result);
         }
     }
