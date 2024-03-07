@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Yiisoft\Input\Http\Tests;
 
 use Closure;
+use LogicException;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
@@ -98,8 +99,11 @@ final class RequestInputParametersResolverTest extends TestCase
         $input = $result['input'];
 
         $this->assertInstanceOf(PersonInput::class, $input);
-        $this->assertNull($input->getValidationResult());
         $this->assertSame('Bo', $input->name);
+
+        $this->expectException(LogicException::class);
+        $this->expectExceptionMessage('Validation result is not set.');
+        $input->getValidationResult();
     }
 
     public function testDoNotThrowExceptionForNonValidatedInput(): void
@@ -141,7 +145,7 @@ final class RequestInputParametersResolverTest extends TestCase
         $this->assertSame('Bo', $result['input']->name);
     }
 
-    public function testDoNotThrowExceptionForValidatedInputWithoutValidation(): void
+    public function testValidatedInputWithoutValidation(): void
     {
         $request = $this->createMock(ServerRequestInterface::class);
         $request->method('getQueryParams')->willReturn(['name' => 'Bo']);
@@ -153,9 +157,9 @@ final class RequestInputParametersResolverTest extends TestCase
         );
         $parameters = TestHelper::getParameters(static fn(PersonInput $input) => null);
 
-        $result = $resolver->resolve($parameters, $request);
-
-        $this->assertSame('Bo', $result['input']->name);
+        $this->expectException(LogicException::class);
+        $this->expectExceptionMessage('Validation result is not set.');
+        $resolver->resolve($parameters, $request);
     }
 
     public function testThrowExceptionForInvalidInput(): void
