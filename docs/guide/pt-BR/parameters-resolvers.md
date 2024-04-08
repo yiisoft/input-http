@@ -1,17 +1,17 @@
-# parameters resolvers
+# Parameters resolvers (Resolvedores de parâmetros)
 
-This package offers multiple
-[custom implementations of parameters resolver](https://github.com/yiisoft/middleware-dispatcher?tab=readme-ov-file#creating-your-own-implementation-of-parameters-resolver)
-from [Yii Middleware Dispatcher](https://github.com/yiisoft/middleware-dispatcher) package:
+Este pacote oferece várias
+[implementações personalizadas do resolvedor de parâmetros](https://github.com/yiisoft/middleware-dispatcher?tab=readme-ov-file#creating-your-own-implementation-of-parameters-resolver)
+do pacote [Yii Middleware Dispatcher](https://github.com/yiisoft/middleware-dispatcher):
 
 - [`HydratorAttributeParametersResolver`](#hydratorattributeparametersresolver)
 - [`RequestInputParametersResolver`](#requestinputparametersresolver)
 
 ## `HydratorAttributeParametersResolver`
 
-Allows using hydrator attributes in middleware executed by middleware dispatcher.
+Permite usar atributos do hydrator no middleware executado pelo despachante do middleware.
 
-The practical use case is mapping query parameters to controller action's arguments:
+O caso de uso prático é mapear parâmetros de consulta para argumentos da ação do controlador:
 
 ```php
 use Psr\Http\Message\ResponseInterface;
@@ -32,9 +32,9 @@ final class PostController
 }
 ```
 
-It's useful if you don't need DTO.
+É útil se você não precisa do DTO.
 
-You can change argument's type hint for automatic type casting:
+Você pode alterar a dica de tipo do argumento para conversão automática de tipo:
 
 ```php
 use Psr\Http\Message\ResponseInterface;
@@ -55,9 +55,9 @@ final class PostController
 }
 ```
 
-### Adding to middleware dispatcher
+### Adicionando ao middleware dispatcher
 
-An example of applying parameters resolver to middleware dispatcher:
+Um exemplo de aplicação do parameters resolver para o middleware dispatcher:
 
 ```php
 use Psr\Container\ContainerInterface;
@@ -85,14 +85,14 @@ $resolver = new HydratorAttributeParametersResolver(
 $dispatcher = new MiddlewareDispatcher(new MiddlewareFactory($container, $resolver), $eventDispatcher);
 ```
 
-More info about dependencies from [Yii Hydrator](https://github.com/yiisoft/hydrator) package can be found in its docs
-and guide:
+Mais informações sobre dependências do pacote [Yii Hydrator](https://github.com/yiisoft/hydrator) podem ser encontradas em sua documentação
+e
 
 - [attribute resolver factory](https://github.com/yiisoft/hydrator/blob/master/docs/guide/en/attribute-resolver-factory.md)
 - [type casting](https://github.com/yiisoft/hydrator/blob/master/docs/guide/en/typecasting.md)
 - [hydrator](https://github.com/yiisoft/hydrator)
 
-Using within a group of resolvers:
+Usando dentro de um grupo de resolvers:
 
 ```php
 use Psr\Container\ContainerInterface;
@@ -121,9 +121,9 @@ $dispatcher = new MiddlewareDispatcher(
 
 ## `RequestInputParametersResolver`
 
-Allows to use [request input](request-input.md) classes as type hints in middleware executed by middleware dispatcher.
+Permite usar classes [request input](request-input.md) como dicas de tipo no middleware executado pelo middleware dispatcher.
 
-The practical use case is mapping request input classes to controller action's arguments:
+O caso de uso prático é mapear classes de entrada de solicitação para argumentos de ação do controlador:
 
 ```php
 use Psr\Http\Message\ResponseInterface;
@@ -151,15 +151,15 @@ final class UpdatePostController
 }
 ```
 
-The used DTO is [request input](request-input.md) with [hydrator attribute](hydrator-attributes.md) applied.
+O DTO usado é [request input](request-input.md) com [atributo do hydrator](hydrator-attributes.md) aplicado.
 
-> As an alternative, [Yii Validating Hydrator](https://github.com/yiisoft/hydrator-validator) can be used instead for
-> automatic validation of request input DTO.
+> Como alternativa, [Yii Validating Hydrator](https://github.com/yiisoft/hydrator-validator) pode ser usado em vez disso para
+> validação automática de solicitação de entrada DTO.
 
-### Adding to middleware dispatcher
+### Adicionando ao middleware dispatcher
 
-The process is very similar to [adding `HydratorAttributeParametersResolver`](#adding-to-middleware-dispatcher), expect
-resolver's initialization (dependencies):
+O processo é muito semelhante a [adicionar `HydratorAttributeParametersResolver`](#adicionando-ao-middleware-dispatcher); espere a
+inicialização do resolver (dependências):
 
 ```php
 use Yiisoft\Hydrator\HydratorInterface;
