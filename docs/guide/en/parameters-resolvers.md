@@ -1,7 +1,7 @@
-# parameters resolvers
+# Parameters' resolvers
 
 This package offers multiple
-[custom implementations of parameters resolver](https://github.com/yiisoft/middleware-dispatcher?tab=readme-ov-file#creating-your-own-implementation-of-parameters-resolver)
+[custom implementations of parameters' resolver](https://github.com/yiisoft/middleware-dispatcher?tab=readme-ov-file#creating-your-own-implementation-of-parameters-resolver)
 from [Yii Middleware Dispatcher](https://github.com/yiisoft/middleware-dispatcher) package:
 
 - [`HydratorAttributeParametersResolver`](#hydratorattributeparametersresolver)
@@ -57,7 +57,7 @@ final class PostController
 
 ### Adding to middleware dispatcher
 
-An example of applying parameters resolver to middleware dispatcher:
+An example of applying parameters' resolver to middleware dispatcher:
 
 ```php
 use Psr\Container\ContainerInterface;

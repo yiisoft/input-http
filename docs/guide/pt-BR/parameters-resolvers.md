@@ -1,4 +1,4 @@
-# Parameters resolvers (Resolvedores de parâmetros)
+# Parameters' resolvers (Resolvedores de parâmetros)
 
 Este pacote oferece várias
 [implementações personalizadas do resolvedor de parâmetros](https://github.com/yiisoft/middleware-dispatcher?tab=readme-ov-file#creating-your-own-implementation-of-parameters-resolver)
@@ -57,7 +57,7 @@ final class PostController
 
 ### Adicionando ao middleware dispatcher
 
-Um exemplo de aplicação do parameters resolver para o middleware dispatcher:
+Um exemplo de aplicação do parameters' resolver para o middleware dispatcher:
 
 ```php
 use Psr\Container\ContainerInterface;
