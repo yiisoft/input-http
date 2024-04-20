@@ -18,6 +18,7 @@
 The package provides [Yii Hydrator](https://github.com/yiisoft/hydrator) attributes
 to get data from [PSR-7 HTTP request](https://www.php-fig.org/psr/psr-7/) and adds extra abilities to middlewares
 processed by [Yii Middleware Dispatcher](https://github.com/yiisoft/middleware-dispatcher):
+
 - maps data from PSR-7 HTTP request to PHP DTO representing user input;
 - uses Yii Hydrator parameter attributes for resolving middleware parameters.
 
@@ -78,15 +79,20 @@ For other available options, see the [guide](docs/guide/en).
 
 ## Documentation
 
-- [Guide](docs/guide/en)
-- [Internals](docs/internals.md)
+- [English](docs/guide/en/README.md)
+- [Portuguese - Brazil](docs/guide/pt-BR/README.md)
 
-## License
+Testing:
 
-The Yii Input HTTP is free software. It is released under the terms of the BSD License.
-Please see [`LICENSE`](./LICENSE.md) for more information.
+- [English](docs/guide/en/testing.md)
+- [Portuguese - Brazil](docs/guide/pt-BR/testing.md)
 
-Maintained by [Yii Software](https://www.yiiframework.com/).
+- More information can be found in the [Internals.](docs/internals.md)
+
+## Support
+
+If you need help or have a question, the [Yii Forum](https://forum.yiiframework.com/c/yii-3-0/63) is a good place for that.
+You may also check out other [Yii Community Resources](https://www.yiiframework.com/community).
 
 ## Support the project
 
@@ -99,3 +105,10 @@ Maintained by [Yii Software](https://www.yiiframework.com/).
 [![Telegram](https://img.shields.io/badge/telegram-join-1DA1F2?style=flat&logo=telegram)](https://t.me/yii3en)
 [![Facebook](https://img.shields.io/badge/facebook-join-1DA1F2?style=flat&logo=facebook&logoColor=ffffff)](https://www.facebook.com/groups/yiitalk)
 [![Slack](https://img.shields.io/badge/slack-join-1DA1F2?style=flat&logo=slack)](https://yiiframework.com/go/slack)
+
+## License
+
+The Yii Input HTTP is free software. It is released under the terms of the BSD License.
+Please see [`LICENSE`](./LICENSE.md) for more information.
+
+Maintained by [Yii Software](https://www.yiiframework.com/).
