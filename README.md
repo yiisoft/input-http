@@ -80,14 +80,14 @@ For other available options, see the [guide](docs/guide/en).
 ## Documentation
 
 - [English](docs/guide/en/README.md)
-- [Portuguese - Brazil](docs/guide/pt-BR/README.md)
+- [Português - Brasil](docs/guide/pt-BR/readme.md)
 
 Testing:
 
 - [English](docs/guide/en/testing.md)
-- [Portuguese - Brazil](docs/guide/pt-BR/testing.md)
+- [Português - Brasil:](docs/guide/pt-BR/testing.md)
 
-- More information can be found in the [Internals.](docs/internals.md)
+- [Internals](docs/internals.md)
 
 ## Support
 
