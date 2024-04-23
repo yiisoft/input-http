@@ -1,6 +1,6 @@
-# Request input
+# Request input (Solicitar entrada)
 
-Request input is a DTO implementing `RequestInputInterface`:
+A entrada da solicitação é um DTO que implementa `RequestInputInterface`:
 
 ```php
 use Yiisoft\Input\Http\AbstractInput;
@@ -16,7 +16,7 @@ final class UpdatePostInput implements RequestInputInterface
 }
 ```
 
-It can be prepared to be filled automatically from request's parameters using attributes:
+Pode ser preparado para ser preenchido automaticamente a partir dos parâmetros da solicitação utilizando atributos:
 
 ```php
 use Yiisoft\Input\Http\AbstractInput;
@@ -34,16 +34,16 @@ final class UpdatePostInput implements RequestInputInterface
 }
 ```
 
-For more available options, see [Hydrator attributes](hydrator-attributes.md) section.
+Para obter mais opções disponíveis, consulte a seção [Atributos do hydrator](hydrator-attributes.md).
 
-The main concept of request input is to ease automatic filling with according
+O principal conceito de entrada de solicitação é facilitar o preenchimento automático de acordo com o
 [resolver](parameters-resolvers.md#requestinputparametersresolver).
-It's possible to use hydrator directly too, though.
+No entanto, também é possível usar o hydrator diretamente.
 
-## Combining with validation
+## Combinando com validação
 
-If you need validation features additionally, extend the DTO from `AbstractInput` class which also implements
-`ValidatedInputInterface`. This way you can use validation attributes for properties:
+Se você precisar de recursos de validação adicionais, estenda o DTO da classe `AbstractInput` que também implementa
+`ValidatedInputInterface`. Desta forma você pode usar atributos de validação para propriedades:
 
 ```php
 use Yiisoft\Input\Http\Attribute\Data\FromBody
@@ -75,7 +75,7 @@ final class UpdatePostInput extends AbstractInput
 }
 ```
 
-Thus, when filled, the DTO can be validated right away, and you will be able to retrieve the validation result:
+Assim, ao ser preenchido, o DTO poderá ser validado imediatamente, e você poderá recuperar o resultado da validação:
 
 ```php
 use Yiisoft\Hydrator\Validator\ValidatedInputInterface;
@@ -86,5 +86,5 @@ $isValid = $result->isValid();
 $errorMessagesMap = $result->getErrorMessagesIndexedByPath();
 ```
 
-More thorough guide for working with the validation result is available in the
-[validator guide](https://github.com/yiisoft/validator/blob/1.x/docs/guide/en/result.md).
+Um guia mais completo para trabalhar com o resultado da validação está disponível na
+[documentação do validator](https://github.com/yiisoft/validator/blob/1.x/docs/guide/pt-BR/result.md).

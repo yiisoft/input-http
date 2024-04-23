@@ -65,7 +65,7 @@ final class RequestInputParametersResolverTest extends TestCase
         ];
     }
 
-    #[DataProvider('dataParameters')]
+    #[DataProvider('dataparameters)]
     public function testParameters(array $expected, Closure $closure): void
     {
         $request = $this->createMock(ServerRequestInterface::class);
