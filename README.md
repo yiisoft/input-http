@@ -79,14 +79,7 @@ For other available options, see the [guide](docs/guide/en).
 
 ## Documentation
 
-- [English](docs/guide/en/README.md)
-- [Português - Brasil](docs/guide/pt-BR/readme.md)
-
-Testing:
-
-- [English](docs/guide/en/testing.md)
-- [Português - Brasil:](docs/guide/pt-BR/testing.md)
-
+- Guide: [English](docs/guide/en/README.md), [Português - Brasil](docs/guide/pt-BR/README.md).
 - [Internals](docs/internals.md)
 
 ## Support
