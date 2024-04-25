@@ -28,6 +28,7 @@ final class UploadedFilesTest extends TestCase
             'a' => $file1,
             'b' => $file2,
             'c' => $file3,
+            'd' => [$file1, $file3],
         ]);
 
         $input = new class () {
@@ -37,6 +38,8 @@ final class UploadedFilesTest extends TestCase
             public ?UploadedFileInterface $b = null;
             #[UploadedFiles]
             public ?UploadedFileInterface $c = null;
+            #[UploadedFiles('d')]
+            public array $array = [];
         };
 
         $hydrator->hydrate($input);
@@ -44,6 +47,7 @@ final class UploadedFilesTest extends TestCase
         $this->assertSame($file1, $input->a);
         $this->assertSame($file2, $input->b);
         $this->assertSame($file3, $input->c);
+        $this->assertSame([$file1, $file3], $input->array);
     }
 
     public function testWithoutBody(): void
