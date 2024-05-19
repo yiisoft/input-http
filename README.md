@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://github.com/yiisoft" target="_blank">
-        <img src="https://yiisoft.github.io/docs/images/yii_logo.svg" height="100px">
+        <img src="https://yiisoft.github.io/docs/images/yii_logo.svg" height="100px" alt="Yii">
     </a>
     <h1 align="center">Yii Input HTTP</h1>
     <br>
@@ -75,15 +75,13 @@ Basic steps:
 - Mark DTO properties with [hydrator attributes](docs/guide/en/hydrator-attributes.md) provided by this package.
 - Add DTO class name as type hint to a class method argument where you want to it to be resolved.
 
-For other available options, see the [guide](docs/guide/en).
-
 ## Documentation
 
 - Guide: [English](docs/guide/en/README.md), [Português - Brasil](docs/guide/pt-BR/README.md).
 - [Internals](docs/internals.md)
 
-If you need help or have a question, the [Yii Forum](https://forum.yiiframework.com/c/yii-3-0/63) is a good place 
-for that. You may also check out other [Yii Community Resources](https://www.yiiframework.com/community).
+If you need help or have a question, the [Yii Forum](https://forum.yiiframework.com/c/yii-3-0/63) is a good place for that.
+You may also check out other [Yii Community Resources](https://www.yiiframework.com/community).
 
 ## License
 
