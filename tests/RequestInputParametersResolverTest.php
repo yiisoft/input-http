@@ -38,7 +38,7 @@ final class RequestInputParametersResolverTest extends TestCase
         $this->assertInstanceOf(PersonInput::class, $person);
         $this->assertFalse($person->getValidationResult()->isValid());
         $this->assertSame(
-            ['name' => ['Value cannot be blank.']],
+            ['name' => ['Name is required.']],
             $person->getValidationResult()->getErrorMessagesIndexedByPath()
         );
 
