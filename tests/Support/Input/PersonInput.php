@@ -12,7 +12,7 @@ use Yiisoft\Validator\Rule\Required;
 final class PersonInput extends AbstractInput
 {
     public function __construct(
-        #[Required]
+        #[Required(message: 'Name is required.')]
         public string $name = '',
     ) {
     }
