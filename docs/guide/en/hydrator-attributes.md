@@ -45,6 +45,10 @@ Here:
 - Uploads will be mapped from request's uploaded files;
 - Client info will be mapped from request's attribute.
 
+> Note: `Body` attribute assumes that request body is parsed. If your implementation of request doesn't parse body
+> automatically, you can use [yiisoft/request-body-parser](https://github.com/yiisoft/request-body-parser) middleware
+> to prepare it.
+
 ### Customization
 
 By default, request parameters are expected to have the same name as DTO properties. To change that, pass the name
@@ -113,6 +117,10 @@ final class CreateUserInput
 ```
 
 `SearchInput` will be mapped from query parameters, while `CreateUserInput` will be mapped from parsed request body.
+
+> Note: `FromBody` attribute assumes that request body is parsed. If your implementation of request doesn't parse body
+> automatically, you can use [yiisoft/request-body-parser](https://github.com/yiisoft/request-body-parser) middleware
+> to prepare it.
 
 ### Customizing parameter names
 
