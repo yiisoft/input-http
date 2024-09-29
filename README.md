@@ -36,7 +36,7 @@ composer require yiisoft/input-http
 
 ## General usage
 
-Yii Input HTTP allows to have DTO with attributes like this:
+Yii Input HTTP allows having DTO with attributes like this:
 
 ```php
 use Yiisoft\Input\Http\AbstractInput;
@@ -67,13 +67,17 @@ final class UpdatePostController
 }
 ```
 
+Note that `FromBody` attribute assumes that request body is parsed. If your implementation of request doesn't parse body
+automatically, you can use [yiisoft/request-body-parser](https://github.com/yiisoft/request-body-parser) middleware
+to prepare it.
+
 Basic steps:
 
 - Configure [storing request](https://github.com/yiisoft/request-provider?tab=readme-ov-file#general-usage).
 - Configure [parameters resolver](docs/guide/en/parameters-resolvers.md).
 - Create DTO ([request input](docs/guide/en/request-input.md)).
 - Mark DTO properties with [hydrator attributes](docs/guide/en/hydrator-attributes.md) provided by this package.
-- Add DTO class name as type hint to a class method argument where you want to it to be resolved.
+- Add DTO class name as a type hint to a class method argument where you want to it to be resolved.
 
 ## Documentation
 
