@@ -50,7 +50,8 @@ final class TestHelper
         return new ParameterAttributesHandler(
             new ContainerAttributeResolverFactory(
                 new SimpleContainer($definitions)
-            )
+            ),
+            new Hydrator(),
         );
     }
 
