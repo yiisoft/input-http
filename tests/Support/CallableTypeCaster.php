@@ -16,6 +16,6 @@ final class CallableTypeCaster implements TypeCasterInterface
 
     public function cast(mixed $value, TypeCastContext $context): Result
     {
-        return Result::success(($this->callable)($value));
+        return Result::success(($this->callable)($value, $context));
     }
 }
