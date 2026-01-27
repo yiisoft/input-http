@@ -24,8 +24,7 @@ final class RequestInputParametersResolver implements ParametersResolverInterfac
     public function __construct(
         private HydratorInterface $hydrator,
         private bool $throwInputValidationException = false,
-    ) {
-    }
+    ) {}
 
     /**
      * @param ReflectionParameter[] $parameters The parameters to resolve.

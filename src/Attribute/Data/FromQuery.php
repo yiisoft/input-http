@@ -29,8 +29,7 @@ final class FromQuery implements DataAttributeInterface
         private string|array|null $name = null,
         private array $map = [],
         private bool $strict = false,
-    ) {
-    }
+    ) {}
 
     /**
      * Get the name of the field in the query string to get data from.

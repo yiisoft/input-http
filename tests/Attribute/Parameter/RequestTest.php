@@ -25,7 +25,7 @@ final class RequestTest extends TestCase
             'c' => 'three',
         ]);
 
-        $input = new class () {
+        $input = new class {
             #[Request('a')]
             public string $a = '';
             #[Request('b')]
@@ -45,7 +45,7 @@ final class RequestTest extends TestCase
     {
         $hydrator = $this->createHydrator([]);
 
-        $input = new class () {
+        $input = new class {
             #[Request('a')]
             public string $a = '';
             #[Request('b')]
@@ -68,7 +68,7 @@ final class RequestTest extends TestCase
             'b' => 'two',
         ]);
 
-        $input = new class () {
+        $input = new class {
             #[Request('a.b')]
             public string $a = '';
         };

@@ -29,8 +29,7 @@ final class FromBody implements DataAttributeInterface
         private string|array|null $name = null,
         private array $map = [],
         private bool $strict = false,
-    ) {
-    }
+    ) {}
 
     /**
      * Get the name of the field in the request body to get data from.

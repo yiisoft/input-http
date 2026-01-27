@@ -21,9 +21,8 @@ final class RequestResolver implements ParameterAttributeResolverInterface
      * @param RequestProviderInterface $requestProvider The request provider.
      */
     public function __construct(
-        private RequestProviderInterface $requestProvider
-    ) {
-    }
+        private RequestProviderInterface $requestProvider,
+    ) {}
 
     public function getParameterValue(
         ParameterAttributeInterface $attribute,

@@ -58,7 +58,7 @@ final class HydratorAttributeParametersResolver implements ParametersResolverInt
 
         $typeCastResult = $this->typeCaster->cast(
             $value,
-            new TypeCastContext($this->hydrator, $parameter)
+            new TypeCastContext($this->hydrator, $parameter),
         );
 
         return $typeCastResult->isResolved() ? $typeCastResult->getValue() : $value;

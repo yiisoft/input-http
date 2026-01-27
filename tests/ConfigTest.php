@@ -29,7 +29,7 @@ final class ConfigTest extends TestCase
         $this->assertInstanceOf(RequestProvider::class, $container->get(RequestProviderInterface::class));
         $this->assertInstanceOf(
             RequestInputParametersResolver::class,
-            $container->get(RequestInputParametersResolver::class)
+            $container->get(RequestInputParametersResolver::class),
         );
     }
 
@@ -49,11 +49,11 @@ final class ConfigTest extends TestCase
     private function createContainer(): Container
     {
         return new Container(
-            ContainerConfig::create()->withDefinitions($this->getContainerDefinitions())
+            ContainerConfig::create()->withDefinitions($this->getContainerDefinitions()),
         );
     }
 
-    private function getContainerDefinitions(array|null $params = null): array
+    private function getContainerDefinitions(?array $params = null): array
     {
         if ($params === null) {
             $params = $this->getParams();

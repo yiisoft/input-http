@@ -18,9 +18,8 @@ final class Body implements ParameterAttributeInterface
      * @psalm-param string|list<string>|null $name
      */
     public function __construct(
-        private string|array|null $name = null
-    ) {
-    }
+        private string|array|null $name = null,
+    ) {}
 
     /**
      * Get the name of the field in the request body to get data from.

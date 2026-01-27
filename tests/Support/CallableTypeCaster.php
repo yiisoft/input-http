@@ -12,8 +12,7 @@ final class CallableTypeCaster implements TypeCasterInterface
 {
     public function __construct(
         private $callable,
-    ) {
-    }
+    ) {}
 
     public function cast(mixed $value, TypeCastContext $context): Result
     {

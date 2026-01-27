@@ -14,6 +14,5 @@ final class PersonInput extends AbstractInput
     public function __construct(
         #[Required(message: 'Name is required.')]
         public string $name = '',
-    ) {
-    }
+    ) {}
 }

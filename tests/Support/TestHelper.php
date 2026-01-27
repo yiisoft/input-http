@@ -40,7 +40,7 @@ final class TestHelper
         return new Hydrator(
             attributeResolverFactory: new ContainerAttributeResolverFactory($container),
             objectFactory: new ContainerObjectFactory(
-                new Injector($container)
+                new Injector($container),
             ),
         );
     }
@@ -49,7 +49,7 @@ final class TestHelper
     {
         return new ParameterAttributesHandler(
             new ContainerAttributeResolverFactory(
-                new SimpleContainer($definitions)
+                new SimpleContainer($definitions),
             ),
             new Hydrator(),
         );

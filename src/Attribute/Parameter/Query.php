@@ -18,9 +18,8 @@ final class Query implements ParameterAttributeInterface
      * @psalm-param string|list<string>|null $name
      */
     public function __construct(
-        private string|array|null $name = null
-    ) {
-    }
+        private string|array|null $name = null,
+    ) {}
 
     /**
      * Get the name of the field in the query string to get data from.

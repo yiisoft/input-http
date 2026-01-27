@@ -39,7 +39,7 @@ final class RequestInputParametersResolverTest extends TestCase
         $this->assertFalse($person->getValidationResult()->isValid());
         $this->assertSame(
             ['name' => ['Name is required.']],
-            $person->getValidationResult()->getErrorMessagesIndexedByPath()
+            $person->getValidationResult()->getErrorMessagesIndexedByPath(),
         );
 
         $this->assertInstanceOf(SimpleRequestInput::class, $simple);
