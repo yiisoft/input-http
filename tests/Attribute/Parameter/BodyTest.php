@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Yiisoft\Input\Http\Tests\Attribute\Parameter;
 
+use HttpSoft\Message\Request;
+use HttpSoft\Message\ServerRequest;
+use HttpSoft\Message\ServerRequestFactory;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 use Yiisoft\Hydrator\AttributeHandling\Exception\UnexpectedAttributeException;
@@ -76,6 +79,23 @@ final class BodyTest extends TestCase
         $hydrator->hydrate($input);
 
         $this->assertSame('', $input->a);
+    }
+
+    public function testNonExistPathReturnsFailResult(): void
+    {
+        $request = new ServerRequest(parsedBody: ['a' => 'one']);
+
+        $requestProvider = new RequestProvider();
+        $requestProvider->set($request);
+
+        $resolver = new BodyResolver($requestProvider);
+
+        $attribute = new Body('non-existing-key');
+        $context = TestHelper::createParameterAttributeResolveContext();
+
+        $result = $resolver->getParameterValue($attribute, $context);
+
+        $this->assertFalse($result->isResolved());
     }
 
     public function testUnexpectedAttributeException(): void
