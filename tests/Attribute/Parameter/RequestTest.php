@@ -81,7 +81,8 @@ final class RequestTest extends TestCase
 
     public function testNonExistPathReturnsFailResult(): void
     {
-        $request = (new ServerRequest())->withAttribute('a', 'one');;
+        $request = (new ServerRequest())->withAttribute('a', 'one');
+        ;
 
         $requestProvider = new RequestProvider();
         $requestProvider->set($request);
