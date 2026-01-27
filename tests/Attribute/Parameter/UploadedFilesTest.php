@@ -31,7 +31,7 @@ final class UploadedFilesTest extends TestCase
             'd' => [$file1, $file3],
         ]);
 
-        $input = new class () {
+        $input = new class {
             #[UploadedFiles('a')]
             public ?UploadedFileInterface $a = null;
             #[UploadedFiles('b')]
@@ -54,7 +54,7 @@ final class UploadedFilesTest extends TestCase
     {
         $hydrator = $this->createHydrator([]);
 
-        $input = new class () {
+        $input = new class {
             #[UploadedFiles('a')]
             public ?UploadedFileInterface $a = null;
             #[UploadedFiles('b')]
@@ -77,7 +77,7 @@ final class UploadedFilesTest extends TestCase
             'b' => $this->createMock(UploadedFileInterface::class),
         ]);
 
-        $input = new class () {
+        $input = new class {
             #[UploadedFiles('a.b')]
             public ?UploadedFileInterface $a = null;
         };

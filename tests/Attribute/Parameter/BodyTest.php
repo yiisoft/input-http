@@ -25,7 +25,7 @@ final class BodyTest extends TestCase
             'c' => 'three',
         ]);
 
-        $input = new class () {
+        $input = new class {
             #[Body('a')]
             public string $a = '';
             #[Body('b')]
@@ -45,7 +45,7 @@ final class BodyTest extends TestCase
     {
         $hydrator = $this->createHydrator(null);
 
-        $input = new class () {
+        $input = new class {
             #[Body('a')]
             public string $a = '';
             #[Body('b')]
@@ -68,7 +68,7 @@ final class BodyTest extends TestCase
             'b' => 'two',
         ]);
 
-        $input = new class () {
+        $input = new class {
             #[Body('a.b')]
             public string $a = '';
         };

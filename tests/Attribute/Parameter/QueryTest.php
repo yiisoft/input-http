@@ -25,7 +25,7 @@ final class QueryTest extends TestCase
             'c' => 'three',
         ]);
 
-        $input = new class () {
+        $input = new class {
             #[Query('a')]
             public string $a = '';
             #[Query('b')]
@@ -45,7 +45,7 @@ final class QueryTest extends TestCase
     {
         $hydrator = $this->createHydrator([]);
 
-        $input = new class () {
+        $input = new class {
             #[Query('a')]
             public string $a = '';
             #[Query('b')]
@@ -68,7 +68,7 @@ final class QueryTest extends TestCase
             'b' => 'two',
         ]);
 
-        $input = new class () {
+        $input = new class {
             #[Query('a.b')]
             public string $a = '';
         };

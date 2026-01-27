@@ -12,8 +12,8 @@ return [
     RequestInputParametersResolver::class => [
         '__construct()' => [
             'hydrator' => Reference::to(ValidatingHydrator::class),
-            'throwInputValidationException' =>
-                $params['yiisoft/input-http']['requestInputParametersResolver']['throwInputValidationException'],
+            'throwInputValidationException'
+                => $params['yiisoft/input-http']['requestInputParametersResolver']['throwInputValidationException'],
         ],
     ],
 ];

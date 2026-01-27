@@ -22,8 +22,7 @@ final class UploadedFilesResolver implements ParameterAttributeResolverInterface
      */
     public function __construct(
         private RequestProviderInterface $requestProvider,
-    ) {
-    }
+    ) {}
 
     public function getParameterValue(
         ParameterAttributeInterface $attribute,
