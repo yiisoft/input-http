@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Yiisoft\Input\Http\Tests;
+namespace Yiisoft\Input\Http\Tests\HydratorAttributeParametersResolver;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
